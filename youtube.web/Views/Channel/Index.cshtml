@@ -1,0 +1,102 @@
+﻿@model youtube.Domain.ViewModels.ChannelVM
+<link rel="stylesheet" href="~/css/siteFour.css" asp-append-version="true" />
+<div class="full-screen-container">
+
+    <div class="sidebar">
+        @await Html.PartialAsync("_SidebarMenu")
+    </div>
+
+  
+    <div class="main-content">
+        <div class="channel-banner">
+            <img src="@(!string.IsNullOrEmpty(Model.ChannelData.BannerImageUrl) ? Model.ChannelData.BannerImageUrl : "https://images.pexels.com/photos/1260727/pexels-photo-1260727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")" alt="Channel Banner" class="banner-img">
+        </div>
+
+        <div class="profile-container">
+            <img src="@(!string.IsNullOrEmpty(Model.ChannelData.ProfilePictureUrl) ? Model.ChannelData.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="Profile Image" class="profile-img">
+
+            <div class="profile-text">
+                <h1 class="channel-name">@Model.ChannelData.Name</h1>
+                <p class="channel-handle">@Model.ChannelData.Handle</p>
+                <p class="channel-description">@Model.ChannelData.Description</p>
+
+                <div class="channel-buttons">
+                    <a asp-action="Update"
+                       asp-route-channelId="@Model.ChannelData.Id" class="btn btn-primary">Customise channel</a>
+                    <button>Manage videos</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <ul class="tabs">
+                <li class="tab active" data-tab="home">Home</li>
+                <li class="tab" data-tab="videos">videos</li>
+                <li class="tab" data-tab="community">Community</li>
+
+            </ul>
+
+            <div id="home" class="tab-content active">
+                <br />
+
+                @await Html.PartialAsync("_uservideos")
+            </div>
+
+            <div id="videos" class="tab-content">
+                <br />
+                <div class="video-tabs">
+                    <button class="tab-button active">Latest</button>
+                    <button class="tab-button">Popular</button>
+                    <button class="tab-button">Oldest</button>
+                </div>
+
+               
+
+                @await Html.PartialAsync("_uservideos")
+            </div>
+
+            <div id="community" class="tab-content">
+                <br />
+                <div class="community-container">
+                    <div class="post-box">
+                        <div class="post-header">
+                            <img src="@Model.ChannelData.ProfilePictureUrl" alt="Profile" class="profile-pic">
+                            <span class="post-name">@Model.ChannelData.Handle</span>
+                            <span class="post-visibility">Visibility: Public</span>
+                        </div>
+                        <div class="post-body">
+                            <p>What's on your mind?</p>
+                            <div class="post-options">
+                                <span class="option">Image</span>
+                                <span class="option">Image poll</span>
+                                <span class="option">Text poll</span>
+                                <span class="option">Quiz</span>
+                                <span class="option">Video</span>
+                            </div>
+                        </div>
+                        <div class="post-buttons">
+                            <button class="post-btn">Post</button>
+                            <button class="dropdown-btn">⏷</button>
+                        </div>
+                    </div>
+
+                    <div class="community-tabs">
+                        <span class="tab active">PUBLISHED</span>
+                        <span class="tab">SCHEDULED</span>
+                        <span class="tab">ARCHIVED</span>
+                    </div>
+
+                    <div class="post-placeholder">
+                        <img src="http://www.w3.org/2000/svg" alt="Publish Icon">
+                        <h2>Publish post</h2>
+                        <p>Posts appear here after you publish and will be visible to your community</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/tabs.js"></script>

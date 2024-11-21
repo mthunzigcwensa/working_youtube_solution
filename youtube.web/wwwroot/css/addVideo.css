@@ -1,0 +1,107 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: none; 
+    scrollbar-color: transparent transparent;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 0; 
+    background: transparent; 
+}
+#add-video-page {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #181818;
+    padding: 20px;
+    color: #ffffff;
+}
+
+    #add-video-page form {
+        background-color: #202020;
+        border-radius: 8px;
+        padding: 20px;
+        width: 400px; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column; 
+        gap: 20px;
+    }
+
+    #add-video-page h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center; 
+    }
+
+    #add-video-page .form-group {
+        display: flex;
+        flex-direction: column; 
+        gap: 5px; 
+    }
+
+    #add-video-page label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+    #add-video-page input[type="text"],
+    #add-video-page input[type="file"],
+    #add-video-page textarea {
+        width: 100%;
+        padding: 10px;
+        background-color: #282828;
+        border: 1px solid #404040;
+        border-radius: 4px;
+        color: #ffffff;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    #add-video-page textarea {
+        resize: none;
+    }
+
+        #add-video-page input:focus,
+        #add-video-page textarea:focus {
+            border-color: #1a73e8;
+            outline: none;
+        }
+
+    #add-video-page button {
+        background-color: #1a73e8;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        width: 100%;
+        align-self: center; 
+    }
+
+        #add-video-page button:hover {
+            background-color: #1666c1;
+        }
+
+    #add-video-page .text-danger {
+        color: #ff4d4d;
+        font-size: 12px;
+        margin-top: 5px;
+        display: block;
+    }

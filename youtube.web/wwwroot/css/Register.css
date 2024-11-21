@@ -1,0 +1,141 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #181818;
+    padding: 20px;
+    color: #ffffff;
+}
+
+    .register-container img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 20px;
+    }
+
+    .register-container h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: steelblue;
+    }
+
+    .register-container form {
+        background-color: #202020;
+        border-radius: 8px;
+        padding: 20px;
+        width: 400px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .register-container .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .register-container label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #ffffff;
+    }
+
+    .register-container input[type="text"],
+    .register-container input[type="email"],
+    .register-container input[type="password"],
+    .register-container input[type="tel"],
+    .register-container select {
+        width: 100%;
+        padding: 10px;
+        background-color: #282828;
+        border: 1px solid #404040;
+        border-radius: 4px;
+        color: #ffffff;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .register-container select {
+        height: 40px;
+        font-size: 14px;
+    }
+
+        .register-container input:focus,
+        .register-container select:focus {
+            border-color: #1a73e8;
+            outline: none;
+        }
+
+    .register-container button {
+        background-color: #1a73e8;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        width: 100%;
+        align-self: center;
+    }
+
+        .register-container button:hover {
+            background-color: #1666c1;
+        }
+
+    .register-container .text-danger {
+        color: #ff4d4d;
+        font-size: 12px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .register-container hr {
+        border-color: #404040;
+        margin: 20px 0;
+    }
+
+    .register-container .text-center {
+        text-align: center;
+        font-size: 14px;
+        color: #aaaaaa;
+    }
+
+        .register-container .text-center a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            .register-container .text-center a:hover {
+                color: #1666c1;
+                text-decoration: underline;
+            }

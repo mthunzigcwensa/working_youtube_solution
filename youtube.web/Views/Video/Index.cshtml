@@ -1,0 +1,110 @@
+﻿@using System.Security.Claims
+@using youtube.Domain.Entities
+@model IEnumerable<Video>
+
+
+
+@{
+    ViewData["Title"] = "Video List";
+    <link rel="stylesheet" href="~/css/videoslist.css" asp-append-version="true" />
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var SuserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+}
+
+<div class="full-screen-container">
+
+    <div class="sidebar">
+        @await Html.PartialAsync("_SidebarMenu")
+
+    </div>
+
+
+ 
+    <div class="main-content">
+
+        <div class="categories-bar">
+            @await Html.PartialAsync("_categories")
+        </div>
+
+        <div class="video-grid">
+            @foreach (var video in Model)
+            {
+                <div class="video-item">
+                    <div class="thumbnail">
+                        <a href="@Url.Action("watchvideo", "Video", new { videoId = video.Id })">
+                            <img src="@video.ImageUrl" alt="Video Thumbnail">
+                        </a>
+
+                       
+                        <a href="@Url.Action("watchvideo", "Video", new { videoId = video.Id })">
+
+                            <video src="@video.VideoUrl" muted loop></video>
+
+                        </a>
+                       
+                        <span class="duration">12:47</span>
+                    </div>
+                    <div class="video-info">
+                        @if (SuserId == video.UserId)
+                        {
+                            <a href="@Url.Action("index", "Channel", new { id = video.UserId })">
+                                <img class="channel-avatar" src="@video.ChannelData.ProfilePictureUrl" alt="Channel Avatar">
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("channelData", "Channel", new { id = video.UserId })">
+                                <img class="channel-avatar" src="@video.ChannelData.ProfilePictureUrl" alt="Channel Avatar">
+                            </a>
+                        }
+
+                        <div class="video-details">
+                            <a href="@Url.Action("watchvideo", "Video", new { videoId = video.Id })">
+                                <p class="video-title">@video.Title</p>
+                            </a>
+                            @if (SuserId == video.UserId)
+                            {
+
+                                <a href="@Url.Action("index", "Channel", new { id = video.UserId })">
+                                    <p class="channel-name">@video.ChannelData.Handle</p>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("channelData", "Channel", new { id = video.UserId })">
+                                    <p class="channel-name">@video.ChannelData.Handle</p>
+                                </a>
+                            }
+
+                            <p class="video-stats">6.8K views • @video.TimeAgo</p>
+                        </div>
+                        <div class="options">
+                            <img src="https://cdn-icons-png.flaticon.com/512/16687/16687960.png" alt="More Options">
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+        const video = thumbnail.querySelector('video');
+
+        thumbnail.addEventListener('mouseenter', () => {
+            video.play();
+        });
+
+        thumbnail.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+
+
+</script>

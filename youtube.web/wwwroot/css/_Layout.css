@@ -1,0 +1,122 @@
+﻿html {
+    font-size: 14px;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #181818;
+    color: #ffffff;
+}
+
+#videoUploadModal .modal-body {
+    text-align: center;
+}
+
+#uploadButton {
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.navbar-custom {
+    background-color: #181818;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+    .navbar-brand img {
+        height: 36px;
+        margin-right: 10px;
+    }
+
+    .navbar-brand span {
+        font-size: 14px;
+        color: #aaa;
+        margin-left: 2px;
+    }
+
+.bi-list {
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+    margin-right: 24px;
+}
+
+.search-bar {
+    display: flex;
+    width: 55%;
+    border: 1px solid #383838;
+    border-radius: 36px;
+    background-color: #121212;
+    align-items: center;
+    height: 56px;
+}
+
+    .search-bar input {
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        color: #fff;
+        padding: 12px;
+        font-size: 18px;
+    }
+
+        .search-bar input::placeholder {
+            color: #606060;
+        }
+
+    .search-bar button {
+        border: none;
+        background: #383838;
+        color: white;
+        border-radius: 0 36px 36px 0;
+        padding: 14px;
+        height: 56px;
+    }
+
+.search-icon {
+    height: 28px;
+    cursor: pointer;
+}
+
+.microphone-icon {
+    height: 36px;
+    cursor: pointer;
+    margin-left: -50px;
+}
+
+.video-icon, .notification-icon {
+    height: 32px;
+    cursor: pointer;
+    margin: 0 15px;
+}
+
+.navbar-icons {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}

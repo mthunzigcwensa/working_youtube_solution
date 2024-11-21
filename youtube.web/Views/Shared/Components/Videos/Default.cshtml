@@ -1,0 +1,25 @@
+﻿@using System.Security.Claims
+@model IEnumerable<youtube.Domain.Entities.Video>
+@{
+    ViewData["Title"] = "Video List";
+    <link rel="stylesheet" href="~/css/watchvideo.css" asp-append-version="true" />
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var SuserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+}
+<div class="suggested-videos">
+    @foreach (var video in Model)
+    {
+        <div class="video-card">
+            <a href="@Url.Action("watchvideo", "Video", new { videoId = video.Id })">
+                <img src="@video.ImageUrl" alt="Thumbnail" class="thumbnail">
+            </a>
+           
+            <div class="video-info">
+                <h3>@video.Title</h3>
+                <p class="@video.ChannelData.Name">@video.ChannelData.Name</p>
+                <p class="views-info">@video.TimeAgo</p>
+            </div>
+        </div>
+    }
+</div>

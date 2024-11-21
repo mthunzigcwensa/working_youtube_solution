@@ -1,0 +1,45 @@
+﻿@using System.Security.Claims
+@using youtube.Domain.Entities
+@model IEnumerable<Video>
+@{
+    ViewData["Title"] = "Video List";
+    <link rel="stylesheet" href="~/css/watchvideo.css" asp-append-version="true" />
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var SuserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+}
+<div class="suggested-videos">
+     @foreach (var video in Model)
+            {
+    <div class="video-card">
+            <img src="@video.ImageUrl" alt="Thumbnail" class="thumbnail">
+            <a href="@Url.Action("watchvideo", "Video", new { videoId = video.Id })">
+
+                <video src="@video.VideoUrl" muted loop></video>
+
+            </a>
+        <div class="video-info">
+            <h3>Inspect Variables Like a Pro in Visual Studio Debugger</h3>
+                <p class="@video.ChannelData.Name">Microsoft Visual Studio</p>
+            <p class="views-info">13K views •@video.TimeAgo</p>
+        </div>
+    </div>
+    }
+
+</div>
+<script>
+    document.querySelectorAll('.thumbnail').forEach(thumbnail => {
+        const video = thumbnail.querySelector('video');
+
+        thumbnail.addEventListener('mouseenter', () => {
+            video.play();
+        });
+
+        thumbnail.addEventListener('mouseleave', () => {
+            video.pause();
+            video.currentTime = 0; 
+        });
+    });
+
+
+</script>

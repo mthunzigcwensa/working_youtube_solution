@@ -1,0 +1,90 @@
+﻿@using youtube.Application.Services.Implementation
+@using youtube.Application.Services.Interfaces
+@using youtube.Domain.Entities
+@model Video
+<link rel="stylesheet" href="~/css/watchvideo.css" asp-append-version="true" />
+<div class="container">
+    <div class="main-content">
+        <div class="video-player-container">
+            <video controls width="100%">
+                <source src="@Model.VideoUrl" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="video-description">
+            <h1>@Model.Title</h1>
+            <div class="channel-info-wrapper">
+                <div class="channel-details">
+                    <img src="@Model.ChannelData.ProfilePictureUrl" alt="Channel Avatar" class="channel-avatar">
+                    <div class="channel-text">
+                        <span class="channel-name">@Model.ChannelData.Handle</span>
+                        <span class="subscribers-count">327K subscribers</span>
+                    </div>
+                </div>
+
+                <button class="subscribe-btn">Subscribe</button>
+
+                <div class="action-buttons">
+                    <button><i class="bi bi-hand-thumbs-up"></i> 683</button>
+                    <button><i class="bi bi-hand-thumbs-down"></i></button>
+                    <button><i class="bi bi-share"></i> Share</button>
+                    <button><i class="bi bi-three-dots"></i></button>
+                </div>
+            </div>
+
+            <div class="description-box">
+                <div class="views-info">
+                    <span>22K views • 1 month ago</span>
+                </div>
+                <div class="video-tags">
+                    <p>#visualstudio #debugging</p>
+                </div>
+                <div class="video-description-text">
+                    <p>@Model.ChannelData.Description</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="comments-section">
+            <h3>27 Comments</h3>
+
+            <div class="add-comment">
+                <img src="https://images.pexels.com/photos/3142443/pexels-photo-3142443.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="User Avatar" class="user-avatar">
+                <input type="text" placeholder="Add a comment..." class="comment-input">
+            </div>
+
+            <div class="comment">
+                <div class="comment-user-info">
+                    <img src="https://images.pexels.com/photos/127420/pexels-photo-127420.jpeg" alt="User Avatar" class="comment-avatar">
+                    <div class="comment-text">
+                        <p class="comment-user">strandloper <span class="comment-time">1 month ago</span></p>
+                        <p class="comment-content">I've waited so long for break on value change. Used to have it in VB6 back in the 90s.</p>
+                        <div class="comment-actions">
+                            <button><i class="bi bi-hand-thumbs-up"></i> 11</button>
+                            <button><i class="bi bi-hand-thumbs-down"></i></button>
+                            <button class="reply-btn">Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-user-info">
+                    <img src="https://images.pexels.com/photos/16110140/pexels-photo-16110140/free-photo-of-i-need-you-like-a-heart-needs-a-beat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="User Avatar" class="comment-avatar">
+                    <div class="comment-text">
+                        <p class="comment-user">tomarquis <span class="comment-time">1 month ago</span></p>
+                        <p class="comment-content">Very useful! I always use VS but was not aware of some of the advanced breakpoints explained on this video.</p>
+                        <div class="comment-actions">
+                            <button><i class="bi bi-hand-thumbs-up"></i> 8</button>
+                            <button><i class="bi bi-hand-thumbs-down"></i></button>
+                            <button class="reply-btn">Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @await Component.InvokeAsync("Videos")
+
+</div>

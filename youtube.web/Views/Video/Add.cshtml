@@ -1,0 +1,46 @@
+﻿@using youtube.Domain.Entities
+@model Video
+
+@{
+    ViewData["Title"] = "Add New Video";
+    <link rel="stylesheet" href="~/css/addVideo.css" asp-append-version="true" />
+}
+
+
+
+<form asp-action="Add" method="post" enctype="multipart/form-data">
+    <div id="add-video-page">
+        <h2>@ViewData["Title"]</h2>
+
+        <form asp-action="Add" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title">Video Title</label>
+                <input asp-for="Title" class="form-control" placeholder="Enter video title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="5" placeholder="Enter video description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="videoFile">Upload Video</label>
+                <input type="file" name="videoFile" class="form-control-file" accept="video/*" />
+            </div>
+
+            <div class="form-group">
+                <label for="imageFile">Upload Thumbnail Image</label>
+                <input type="file" name="imageFile" class="form-control-file" accept="image/*" />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Add Video</button>
+        </form>
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

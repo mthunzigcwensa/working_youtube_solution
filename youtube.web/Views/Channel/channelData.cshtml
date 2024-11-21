@@ -1,0 +1,75 @@
+﻿@model youtube.Domain.ViewModels.ChannelVM
+<link rel="stylesheet" href="~/css/siteFour.css" asp-append-version="true" />
+<div class="full-screen-container">
+
+    <div class="sidebar">
+        @await Html.PartialAsync("_SidebarMenu")
+    </div>
+
+    <div class="main-content">
+        <div class="channel-banner">
+            <img src="@(!string.IsNullOrEmpty(Model.ChannelData.BannerImageUrl) ? Model.ChannelData.BannerImageUrl : "https://yt3.googleusercontent.com/zSagDP1dmvC0TlItvizlwvWxrAhvNzd1Eydpe-POsMwM3fpI7k6O4OvSDMDm-eJhCCGBCHQr=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj")" alt="Channel Banner" class="banner-img">
+        </div>
+
+        <div class="profile-container">
+            <img src="@(!string.IsNullOrEmpty(Model.ChannelData.ProfilePictureUrl) ? Model.ChannelData.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="Profile Image" class="profile-img">
+
+            <div class="profile-text">
+                <h1 class="channel-name">@Model.ChannelData.Name</h1>
+                <p class="channel-handle">@Model.ChannelData.Handle</p>
+                <p class="channel-description">@Model.ChannelData.Description</p>
+
+                <div class="channel-buttons">
+                    
+                    <button>Subscribe</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <ul class="tabs">
+                <li class="tab active" data-tab="home">Home</li>
+                <li class="tab" data-tab="videos">videos</li>
+                <li class="tab" data-tab="community">Community</li>
+
+            </ul>
+
+            <div id="home" class="tab-content active">
+               <br />
+
+                    @await Html.PartialAsync("_uservideos")
+            
+            </div>
+
+            <div id="videos" class="tab-content">
+                <br />
+                <div class="video-tabs">
+                    <button class="tab-button active">Latest</button>
+                    <button class="tab-button">Popular</button>
+                    <button class="tab-button">Oldest</button>
+                </div>
+
+                @await Html.PartialAsync("_uservideos")
+            </div>
+
+            <div id="community" class="tab-content">
+                <br />
+                <div class="community-container">
+                   
+                    <div class="content-text">
+                        <div class="content-image">
+                            <img src="https://www.gstatic.com/youtube/img/channels/core_channel_no_activity_dark.svg" alt="Create content illustration">
+                        </div>
+                        <h2>currently there is no content</h2>
+                        <p>ping @Model.ChannelData.Name and tell him to post for the community</p>
+                        <button class="create-btn">Ping</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/tabs.js"></script>

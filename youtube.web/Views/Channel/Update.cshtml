@@ -1,0 +1,119 @@
+﻿@model youtube.Domain.Entities.ChannelData
+
+
+@{
+    ViewData["Title"] = "Update Channel";
+    <link rel="stylesheet" href="~/css/siteFive.css" asp-append-version="true" />
+}
+
+
+<div class="full-screen-container">
+    <div class="sidebar">
+        <div class="profile-section">
+            <img src="@Model.BannerImageUrl" alt="Channel Profile" class="profile-image">
+            <h3 class="channel-name">Your channel</h3>
+            <p class="channel-link">mthunzi's code</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><i class="bi bi-speedometer2"></i> Dashboard</li>
+            <li><i class="bi bi-file-earmark-text"></i> Content</li>
+            <li><i class="bi bi-bar-chart"></i> Analytics</li>
+            <li><i class="bi bi-chat-left-text"></i> Comments</li>
+            <li><i class="bi bi-translate"></i> Subtitles</li>
+            <li><i class="bi bi-c-circle"></i> Copyright</li>
+            <li><i class="bi bi-cash"></i> Earn</li>
+            <li><i class="bi bi-gear"></i> Settings</li>
+            <li><i class="bi bi-envelope"></i> Send feedback</li>
+        </ul>
+    </div>
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+    <div class="content-container">
+        <div class="header">
+            <h2>Channel customisation</h2>
+            <div class="tabs-and-buttons">
+                <ul class="nav-tabs">
+                    <li class="tab active" data-tab="profile">Profile</li>
+                    <li class="tab" data-tab="home-tab">Home tab</li>
+                </ul>
+                <div class="header-buttons">
+                    <button class="view-channel">View channel</button>
+                    <button class="cancel">Cancel</button>
+                    <button class="publish">Publish</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="profile" class="tab-content active">
+            <div class="customisation-section">
+                <div class="customisation-item">
+                    <h3>Banner image</h3>
+                    <p>This image will appear across the top of your channel.</p>
+                    <div class="banner-container">
+                        <div class="image-placeholder">
+                            <img src="@Model.BannerImageUrl" alt="Banner Image" class="image-preview">
+                        </div>
+                        <div class="image-options-container">
+                            <p>For the best results on all devices, use an image that's at least 2048 x 1152 pixels and 6 MB or less.</p>
+                            <div class="image-options">
+                                    <input asp-for="BannerImageUrl" type="file" name="BannerImage" accept="image/*" />
+                                <button>Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customisation-item">
+                    <h3>Picture</h3>
+                    <p>Your profile picture will appear where your channel is presented on YouTube.</p>
+                    <div class="picture-container">
+                        <div class="profile-image-placeholder">
+                                <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="profile-preview">
+                        </div>
+                        <div class="image-options-container">
+                            <p>It's recommended that you use a picture that's at least 98 x 98 pixels and 4 MB or less.</p>
+                            <div class="image-options">
+                                    <input asp-for="ProfilePictureUrl" type="file" name="ProfilePicture" accept="image/*" />
+                                <button>Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customisation-item">
+                    <h3>Name</h3>
+                    <p>Choose a channel name that represents you and your content. Changes made to your name and picture are only visible on YouTube and not on other Google services. You can change your name twice in 14 days.</p>
+                        <input type="text" asp-for="Name" class="input-field">
+                </div>
+
+                <div class="customisation-item">
+                    <h3>Handle</h3>
+                    <p>Choose your unique handle by adding letters and numbers. You can change your handle back within 14 days. Handles can be changed twice every 14 days.</p>
+                        <input type="text" asp-for="Handle" class="input-field">
+                    <p>https://localhost:7118/userchanel/@@mthunzicgwensa</p>
+                </div>
+
+                <div class="customisation-item">
+                    <h3>Description</h3>
+                        <textarea asp-for="Description" class="input-field" rows="4"></textarea>
+                </div>
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+
+
+        </div>
+
+        <div id="home-tab" class="tab-content">
+            <p>This is the content for the Home tab.</p>
+        </div>
+    </div>
+    </form>
+</div>
+<script src="~/js/tabs.js"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

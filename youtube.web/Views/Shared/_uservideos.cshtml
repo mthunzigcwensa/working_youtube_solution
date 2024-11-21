@@ -1,0 +1,47 @@
+﻿@model youtube.Domain.ViewModels.ChannelVM
+
+@{
+
+    <link rel="stylesheet" href="~/css/siteFour.css" asp-append-version="true" />
+}
+
+@if (!Model.UserVideos.Any())
+{
+    
+    <div class="content-text">
+        <div class="content-image">
+            <img src="https://www.gstatic.com/youtube/img/channels/core_channel_no_activity_dark.svg" alt="Create content illustration">
+        </div>
+        <h2>Create content on any device</h2>
+        <p>Upload and record at home or on the go. Everything that you make public will appear here.</p>
+        <button class="create-btn">Create</button>
+    </div>
+}
+else
+{
+    <div class="video-grid">
+        @foreach (var video in Model.UserVideos)
+        {
+
+
+            <a href="@Url.Action("watchvideo", "Video", new { videoId = video.Id })">
+
+             
+                    <div class="video-card">
+                    <img src="@video.ImageUrl" alt="Video Thumbnail" class="thumbnail">
+                        <div class="video-info">
+                        <div class="video-title">@video.Title</div>
+                            <div class="video-meta">
+                            <span>52K views</span> • <span> @video.TimeAgo  </span>
+                            </div>
+                            <div class="video-duration">20:41</div>
+                        </div>
+                    </div>
+
+
+               
+            </a>
+        }
+    </div>
+}
+

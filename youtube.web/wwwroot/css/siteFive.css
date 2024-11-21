@@ -1,0 +1,294 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #181818;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+/* Full-page layout */
+.full-screen-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 240px;
+    
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.channel-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.channel-link {
+    color: #aaa;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    margin: 15px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+}
+
+.sidebar-menu li i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: #aaa;
+}
+
+.sidebar-menu li:hover {
+    color: #aaa;
+}
+
+.sidebar-menu li:hover i {
+    color: white;
+}
+
+/* Content section */
+.content-container {
+    flex-grow: 1;
+    padding: 20px;
+    color: white;
+}
+
+.header {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.header h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.tabs-and-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tabs */
+.nav-tabs {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tab.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.tab-content {
+    display: none;
+    margin-top: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Input and Textarea fields */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    background-color: #222;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* Customisation Section */
+.customisation-section {
+    margin-top: 30px;
+}
+
+.customisation-item {
+    margin-bottom: 40px;
+}
+
+    .customisation-item h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .customisation-item p {
+        color: #aaa;
+        margin-bottom: 10px;
+    }
+
+/* Banner Image and Profile Picture containers */
+.banner-container, .picture-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Image placeholder styling */
+.image-placeholder, .profile-image-placeholder {
+    width: 300px;
+    height: 150px;
+    background-color: #333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview, .profile-preview {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: inherit;
+}
+
+/* Image options container with buttons and text */
+.image-options-container {
+    flex-grow: 1;
+}
+
+    .image-options-container p {
+        margin-bottom: 10px;
+        color: #aaa;
+    }
+
+.image-options {
+    display: flex;
+    gap: 10px;
+}
+
+    .image-options button {
+        padding: 10px 20px;
+        background-color: #333;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+        .image-options button:hover {
+            background-color: #444;
+        }
+
+/* Header buttons */
+.header-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.view-channel, .cancel, .publish {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.view-channel {
+    background-color: #333;
+    color: white;
+}
+
+.cancel {
+    background-color: #555;
+    color: white;
+}
+
+.publish {
+    background-color: #009688;
+    color: white;
+}
+
+
+/* Header buttons */
+.header-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.view-channel, .cancel, .publish {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.view-channel {
+    background-color: #333;
+    color: white;
+}
+
+.cancel {
+    background-color: #555;
+    color: white;
+}
+
+.publish {
+    background-color: #009688;
+    color: white;
+}
+
+/* Ensuring scrollbars are hidden */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
