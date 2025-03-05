@@ -12,6 +12,7 @@ namespace youtube.Application.Common.Interfaces
         IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false);
         T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false);
         void Add(T entity);
+        void GetById(int Id);
         bool Any(Expression<Func<T, bool>> filter);
         void Remove(T entity);
     }

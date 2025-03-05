@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using youtube.Application.Common.Interfaces;
 using youtube.Application.Services.Implementation;
@@ -10,15 +12,27 @@ namespace youtube.web.Controllers
 {
     public class ChannelController : Controller
     {
-        
+
         private readonly IChannelService _channelService;
         private readonly IVideoService _videoService;
-
-        public ChannelController(IUnitOfWork unitOfWork, IChannelService channelService, IVideoService videoService)
+        private readonly BlobServiceClient _blobServiceClient;
+        private readonly string _profilePictureContainerName;
+        private readonly string _bannerContainerName;
+        public ChannelController(IUnitOfWork unitOfWork, IChannelService channelService, IVideoService videoService, IConfiguration configuration)
         {
-           
+
             _channelService = channelService;
             _videoService = videoService;
+            var connectionString = configuration["AzureBlobStorage:ConnectionString"];
+            _profilePictureContainerName = configuration["AzureBlobStorage:ProfilePictureContainerName"];
+            _bannerContainerName = configuration["AzureBlobStorage:BannerContainerName"];
+            _blobServiceClient = new BlobServiceClient(connectionString);
+
+            // Ensure containers exist (run once during startup or here for simplicity)
+            _blobServiceClient.GetBlobContainerClient(_profilePictureContainerName)
+                .CreateIfNotExistsAsync().GetAwaiter().GetResult();
+            _blobServiceClient.GetBlobContainerClient(_bannerContainerName)
+                .CreateIfNotExistsAsync().GetAwaiter().GetResult();
         }
         public async Task<IActionResult> Index()
         {
@@ -27,7 +41,7 @@ namespace youtube.web.Controllers
 
             if (string.IsNullOrEmpty(userId))
             {
-               
+
                 return RedirectToAction("Login", "Account");
             }
 
@@ -53,7 +67,7 @@ namespace youtube.web.Controllers
 
         public async Task<IActionResult> channelData(string id)
         {
-           
+
 
             var channelData = await _channelService.GetChannelDataAsync(id);
 
@@ -98,27 +112,53 @@ namespace youtube.web.Controllers
             string bannerImageUrl = null;
             string profilePictureUrl = null;
 
+            // Handle banner image upload
             if (BannerImage != null && BannerImage.Length > 0)
             {
-                var bannerImagePath = Path.Combine("wwwroot/uploads", BannerImage.FileName);
-                using (var stream = new FileStream(bannerImagePath, FileMode.Create))
+                var bannerContainerClient = _blobServiceClient.GetBlobContainerClient(_bannerContainerName);
+                string bannerBlobName = $"{Guid.NewGuid()}_{Path.GetFileName(BannerImage.FileName)}";
+                var bannerBlobClient = bannerContainerClient.GetBlobClient(bannerBlobName);
+
+                // Upload the banner image
+                using (var stream = BannerImage.OpenReadStream())
                 {
-                    await BannerImage.CopyToAsync(stream);
+                    await bannerBlobClient.UploadAsync(stream, new BlobUploadOptions
+                    {
+                        HttpHeaders = new BlobHttpHeaders { ContentType = BannerImage.ContentType }
+                    });
                 }
-                bannerImageUrl = $"/uploads/{BannerImage.FileName}";
+
+                bannerImageUrl = bannerBlobClient.Uri.ToString();
             }
 
+            // Handle profile picture upload
             if (ProfilePicture != null && ProfilePicture.Length > 0)
             {
-                var profilePicturePath = Path.Combine("wwwroot/uploads", ProfilePicture.FileName);
-                using (var stream = new FileStream(profilePicturePath, FileMode.Create))
+                var profileContainerClient = _blobServiceClient.GetBlobContainerClient(_profilePictureContainerName);
+                string profileBlobName = $"{Guid.NewGuid()}_{Path.GetFileName(ProfilePicture.FileName)}";
+                var profileBlobClient = profileContainerClient.GetBlobClient(profileBlobName);
+
+                // Upload the profile picture
+                using (var stream = ProfilePicture.OpenReadStream())
                 {
-                    await ProfilePicture.CopyToAsync(stream);
+                    await profileBlobClient.UploadAsync(stream, new BlobUploadOptions
+                    {
+                        HttpHeaders = new BlobHttpHeaders { ContentType = ProfilePicture.ContentType }
+                    });
                 }
-                profilePictureUrl = $"/uploads/{ProfilePicture.FileName}";
+
+                profilePictureUrl = profileBlobClient.Uri.ToString();
             }
 
-            var updatedChannel = await _channelService.UpdateChannelDataAsync(id, bannerImageUrl ?? "", profilePictureUrl ?? "", name, handle, description);
+            // Update channel data with new URLs (or keep existing URLs if no new file uploaded)
+            var updatedChannel = await _channelService.UpdateChannelDataAsync(
+                id,
+                bannerImageUrl ?? "",
+                profilePictureUrl ?? "",
+                name,
+                handle,
+                description
+            );
 
             if (updatedChannel == null)
             {
@@ -127,7 +167,6 @@ namespace youtube.web.Controllers
 
             return RedirectToAction("Index");
         }
-
 
     }
 }

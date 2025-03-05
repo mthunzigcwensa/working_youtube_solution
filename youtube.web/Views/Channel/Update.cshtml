@@ -10,9 +10,9 @@
 <div class="full-screen-container">
     <div class="sidebar">
         <div class="profile-section">
-            <img src="@Model.BannerImageUrl" alt="Channel Profile" class="profile-image">
+            <img src="@(!string.IsNullOrEmpty(Model.ProfilePictureUrl) ? Model.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" class="profile-image">
             <h3 class="channel-name">Your channel</h3>
-            <p class="channel-link">mthunzi's code</p>
+            <p class="channel-link">@Model.Handle</p>
         </div>
         <ul class="sidebar-menu">
             <li><i class="bi bi-speedometer2"></i> Dashboard</li>
@@ -51,7 +51,7 @@
                     <p>This image will appear across the top of your channel.</p>
                     <div class="banner-container">
                         <div class="image-placeholder">
-                            <img src="@Model.BannerImageUrl" alt="Banner Image" class="image-preview">
+                                <img src="@(!string.IsNullOrEmpty(Model.BannerImageUrl) ? Model.BannerImageUrl : "https://images.pexels.com/photos/1260727/pexels-photo-1260727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")" alt="Banner Image" class="image-preview">
                         </div>
                         <div class="image-options-container">
                             <p>For the best results on all devices, use an image that's at least 2048 x 1152 pixels and 6 MB or less.</p>
@@ -68,7 +68,7 @@
                     <p>Your profile picture will appear where your channel is presented on YouTube.</p>
                     <div class="picture-container">
                         <div class="profile-image-placeholder">
-                                <img src="@Model.ProfilePictureUrl" alt="Profile Picture" class="profile-preview">
+                                <img src="@(!string.IsNullOrEmpty(Model.ProfilePictureUrl) ? Model.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="Profile Picture" class="profile-preview">
                         </div>
                         <div class="image-options-container">
                             <p>It's recommended that you use a picture that's at least 98 x 98 pixels and 4 MB or less.</p>

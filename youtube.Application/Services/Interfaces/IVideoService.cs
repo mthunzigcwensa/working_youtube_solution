@@ -15,5 +15,6 @@ namespace youtube.Application.Services.Interfaces
         Task UpdateVideoAsync(Video video);
         Task DeleteVideoAsync(int id);
         Task<IEnumerable<Video>> GetVideosByUserIdAsync(string userId);
+        Task AddView(int videoId);
     }
 }

@@ -274,6 +274,38 @@ namespace youtube.Infrastrcture.Migrations
                     b.ToTable("ChannelData");
                 });
 
+            modelBuilder.Entity("youtube.Domain.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("VideoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("postedBy")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("userComment")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("VideoId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("youtube.Domain.Entities.Video", b =>
                 {
                     b.Property<int>("Id")
@@ -313,6 +345,10 @@ namespace youtube.Infrastrcture.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("viewCount")
+                        .HasMaxLength(255)
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -370,6 +406,25 @@ namespace youtube.Infrastrcture.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("youtube.Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("youtube.Domain.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("youtube.Domain.Entities.Video", "VideoData")
+                        .WithMany()
+                        .HasForeignKey("VideoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("VideoData");
                 });
 
             modelBuilder.Entity("youtube.Domain.Entities.Video", b =>

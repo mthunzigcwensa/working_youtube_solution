@@ -48,7 +48,7 @@ namespace youtube.Infrastrcture.Repository
 
             var channelData = _context.ChannelData
                 .FromSqlRaw("EXEC GetChannelDataByUserId @UserId", userIdParam)
-                .AsEnumerable() 
+                .AsEnumerable()
                 .FirstOrDefault();
 
             return channelData;
@@ -60,7 +60,7 @@ namespace youtube.Infrastrcture.Repository
 
             var channelData = _context.ChannelData
                 .FromSqlRaw("EXEC GetChannelDataById @Id", IdParam)
-                .AsEnumerable()  
+                .AsEnumerable()
                 .FirstOrDefault();
 
             return channelData;
@@ -68,18 +68,18 @@ namespace youtube.Infrastrcture.Repository
 
         public async Task<ChannelData> UpdateChannelDataAsync(int id, string bannerImageUrl, string profilePictureUrl, string name, string handle, string description)
         {
-            
+
             var result = await _context.Database.ExecuteSqlRawAsync(
                 "EXEC UpdateChannelData @Id = {0}, @BannerImageUrl = {1}, @ProfilePictureUrl = {2}, @Name = {3}, @Handle = {4}, @Description = {5}",
                 id, bannerImageUrl, profilePictureUrl, name, handle, description);
 
-          
-            if (result > 0) 
+
+            if (result > 0)
             {
                 return await _context.ChannelData.FindAsync(id);
             }
 
-            return null; 
+            return null;
         }
 
 

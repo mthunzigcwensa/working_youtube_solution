@@ -1,15 +1,19 @@
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using youtube.Application.Common.Interfaces;
+using youtube.Application.Services.Implementation;
+using youtube.Application.Services.Interfaces;
 using youtube.Domain.Entities;
 using youtube.Infrastrcture.Data;
 using youtube.Infrastrcture.Repository;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using youtube.Application.Services.Interfaces;
-using youtube.Application.Services.Implementation;
 using youtube.web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 1073741824; // Set to 100 MB (adjust as needed)
+});
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -31,12 +35,19 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IChannelService, ChannelService>(); 
+builder.Services.AddScoped<IChannelService, ChannelService>();
 builder.Services.AddScoped<IVideoService, VideoService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 1073741824; // Set to 100 MB (adjust as needed)
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

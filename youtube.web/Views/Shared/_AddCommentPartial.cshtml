@@ -1,0 +1,15 @@
+﻿@model youtube.Domain.Entities.Comment
+
+<form asp-action="addComment" asp-controller="Comment" method="post">
+    <input type="hidden" name="videoId" value="@Model.VideoId" />
+    <div class="form-group">
+        <input asp-for="userComment" required type="text" placeholder="Add a comment..." class="comment-input">
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+    </div>
+    <span asp-validation-for="userComment" class="text-danger"></span>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

@@ -28,8 +28,8 @@ namespace youtube.web.Controllers
             IUnitOfWork unitOfWork,
             IChannelService channelService,
             UserService userService
-             
-            
+
+
             )
         {
             _roleManager = roleManager;
@@ -132,7 +132,7 @@ namespace youtube.web.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_User);
                     }
-                   await _channelService.CreateChannelAsync(user.Id, user.Name);
+                    await _channelService.CreateChannelAsync(user.Id, user.Name);
                     TempData["success"] = "acccount created...pease login";
                     if (string.IsNullOrEmpty(registerVM.RedirectUrl))
                     {
@@ -196,7 +196,7 @@ namespace youtube.web.Controllers
             return View(loginVM);
         }
 
-        
+
 
         [Authorize(Roles = SD.Role_Admin)]
         public IActionResult users()
@@ -242,7 +242,7 @@ namespace youtube.web.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-              
+
                 return Json(new { success = false, message = $"An error occurred: {ex.Message}" });
             }
         }

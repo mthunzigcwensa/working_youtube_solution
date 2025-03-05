@@ -13,11 +13,14 @@
         <h2>@ViewData["Title"]</h2>
 
         <form asp-action="Add" method="post" enctype="multipart/form-data">
+
+            
             <div class="form-group">
                 <label asp-for="Title">Video Title</label>
                 <input asp-for="Title" class="form-control" placeholder="Enter video title" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
 
             <div class="form-group">
                 <label asp-for="Description">Description</label>

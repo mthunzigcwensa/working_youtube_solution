@@ -1,0 +1,41 @@
+﻿@using youtube.Domain.Entities
+@model IEnumerable<Comment>
+
+
+    <h3>@(Model?.Count() ?? 0) Comment(s)</h3>
+
+    <!-- Display each comment -->
+    @if (Model != null && Model.Any())
+    {
+        foreach (var comment in Model)
+        {
+            <div class="comment">
+                <div class="comment-user-info">
+                    <!-- Avatar image -->
+                <img src="@(!string.IsNullOrEmpty(@comment.ApplicationUser.ProfilePic) ? @comment.ApplicationUser.ProfilePic : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="User Avatar" class="comment-avatar">
+                    
+                    <!-- Comment details -->
+                    <div class="comment-text">
+                        <p class="comment-user">
+                           @@@comment.ApplicationUser?.UserName
+                            <span class="comment-time">
+                                @comment.TimeAgo
+                            </span>
+                        </p>
+                        <p class="comment-content">@comment.userComment</p>
+
+                        <!-- Comment actions -->
+                        <div class="comment-actions">
+                            <button><i class="bi bi-hand-thumbs-up"></i> 11</button>
+                            <button><i class="bi bi-hand-thumbs-down"></i></button>
+                            <button class="reply-btn">Reply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No comments yet. Be the first to comment!</p>
+    }

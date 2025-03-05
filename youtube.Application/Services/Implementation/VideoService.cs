@@ -47,5 +47,10 @@ namespace youtube.Application.Services.Implementation
         {
             return await _unitOfWork.Video.GetVideosByUserIdAsync(userId);
         }
+
+        public async Task AddView(int videoId)
+        {
+            await _unitOfWork.Video.AddViewAsync(videoId);
+        }
     }
 }

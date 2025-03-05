@@ -8,9 +8,10 @@ namespace youtube.Application.Common.Interfaces
 {
     public interface IUnitOfWork
     {
-        IApplicationUserRepository User { get; }      
+        IApplicationUserRepository User { get; }
         IChannelRepository Channel { get; }
         IVideoRepository Video { get; }
+        ICommentRepository Comment { get; }
         void Save();
     }
 }

@@ -46,7 +46,7 @@ namespace youtube.Infrastrcture.Repository
             }
             if (!string.IsNullOrEmpty(includeProperties))
             {
-               
+
                 foreach (var includeProp in includeProperties
                     .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
@@ -80,6 +80,15 @@ namespace youtube.Infrastrcture.Repository
                 }
             }
             return query.ToList();
+        }
+
+        public void GetById(int Id)
+        {
+            var entity = dbSet.Find(Id);
+            if (entity == null)
+            {
+                throw new InvalidOperationException($"Entity with ID {Id} not found.");
+            }
         }
 
         public void Remove(T entity)

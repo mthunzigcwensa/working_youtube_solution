@@ -4,7 +4,6 @@ using youtube.Domain.Entities;
 
 namespace youtube.web.Services
 {
-  
     public class UserService
     {
         private readonly IApplicationUserRepository _applicationUserRepository;
@@ -16,7 +15,7 @@ namespace youtube.web.Services
 
         public ApplicationUser GetLoggedInUserData(ClaimsPrincipal user)
         {
-    
+
             var claimsIdentity = (ClaimsIdentity)user.Identity;
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 

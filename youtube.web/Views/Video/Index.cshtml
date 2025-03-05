@@ -43,19 +43,18 @@
 
                         </a>
                        
-                        <span class="duration">12:47</span>
-                    </div>
+                                            </div>
                     <div class="video-info">
                         @if (SuserId == video.UserId)
                         {
                             <a href="@Url.Action("index", "Channel", new { id = video.UserId })">
-                                <img class="channel-avatar" src="@video.ChannelData.ProfilePictureUrl" alt="Channel Avatar">
+                                <img class="channel-avatar" src="@(!string.IsNullOrEmpty(@video.ChannelData.ProfilePictureUrl) ? @video.ChannelData.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="Channel Avatar">
                             </a>
                         }
                         else
                         {
                             <a href="@Url.Action("channelData", "Channel", new { id = video.UserId })">
-                                <img class="channel-avatar" src="@video.ChannelData.ProfilePictureUrl" alt="Channel Avatar">
+                                <img class="channel-avatar" src="@(!string.IsNullOrEmpty(@video.ChannelData.ProfilePictureUrl) ? @video.ChannelData.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="Channel Avatar">
                             </a>
                         }
 
@@ -77,7 +76,7 @@
                                 </a>
                             }
 
-                            <p class="video-stats">6.8K views • @video.TimeAgo</p>
+                            <p class="video-stats">@video.viewCount views • @video.TimeAgo</p>
                         </div>
                         <div class="options">
                             <img src="https://cdn-icons-png.flaticon.com/512/16687/16687960.png" alt="More Options">
