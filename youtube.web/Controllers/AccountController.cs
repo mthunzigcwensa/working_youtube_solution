@@ -124,6 +124,7 @@ namespace youtube.web.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Assign role
                     if (!string.IsNullOrEmpty(registerVM.Role))
                     {
                         await _userManager.AddToRoleAsync(user, registerVM.Role);
@@ -132,15 +133,38 @@ namespace youtube.web.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_User);
                     }
+
+                    // Create channel
                     await _channelService.CreateChannelAsync(user.Id, user.Name);
-                    TempData["success"] = "acccount created...pease login";
-                    if (string.IsNullOrEmpty(registerVM.RedirectUrl))
+
+                    // Automatically log in the user
+                    var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, registerVM.Password, isPersistent: false, lockoutOnFailure: false);
+
+                    if (signInResult.Succeeded)
+                    {
+                        TempData["success"] = "Account created successfully! You are now logged in.";
+                    }
+                    else
+                    {
+                        TempData["error"] = "Account created, but failed to log you in automatically. Please log in manually.";
+                        return RedirectToAction("Login", "Account");
+                    }
+
+                    // Redirect based on role or RedirectUrl
+                    if (await _userManager.IsInRoleAsync(user, SD.Role_Admin))
                     {
                         return RedirectToAction("Index", "Video");
                     }
                     else
                     {
-                        return LocalRedirect(registerVM.RedirectUrl);
+                        if (string.IsNullOrEmpty(registerVM.RedirectUrl))
+                        {
+                            return RedirectToAction("Index", "Video");
+                        }
+                        else
+                        {
+                            return LocalRedirect(registerVM.RedirectUrl);
+                        }
                     }
                 }
 
@@ -149,6 +173,7 @@ namespace youtube.web.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
+
             registerVM.RoleList = _roleManager.Roles.Select(x => new SelectListItem
             {
                 Text = x.Name,
@@ -166,20 +191,19 @@ namespace youtube.web.Controllers
                 var result = await _signInManager
                     .PasswordSignInAsync(loginVM.Email, loginVM.Password, loginVM.RememberMe, lockoutOnFailure: false);
 
-
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(loginVM.Email);
-                    TempData["success"] = "YOU HAVE LOGGED IN";
+                    TempData["success"] = "You have logged in successfully!";
                     if (await _userManager.IsInRoleAsync(user, SD.Role_Admin))
                     {
-                        return RedirectToAction("index", "Video");
+                        return RedirectToAction("Index", "Video");
                     }
                     else
                     {
                         if (string.IsNullOrEmpty(loginVM.RedirectUrl))
                         {
-                            return RedirectToAction("index", "Video");
+                            return RedirectToAction("Index", "Video");
                         }
                         else
                         {
@@ -195,7 +219,6 @@ namespace youtube.web.Controllers
 
             return View(loginVM);
         }
-
 
 
         [Authorize(Roles = SD.Role_Admin)]

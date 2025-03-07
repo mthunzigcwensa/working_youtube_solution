@@ -207,13 +207,18 @@ html, body {
 }
 
 .video-title {
-    font-size: 16px; /* Slightly larger font for readability */
+    font-size: 14px; /* Slightly larger font for readability */
     font-weight: bold;
     color: white;
     margin: 0 0 5px;
     overflow: hidden;
-    text-overflow: ellipsis; /* Truncate long titles with ellipsis */
-    white-space: nowrap;
+    text-overflow: ellipsis; /* Still applies for truncation */
+    white-space: normal; /* Allows text to wrap */
+    display: -webkit-box; /* Enables line clamping */
+    -webkit-line-clamp: 2; /* Limits to 2 lines */
+    -webkit-box-orient: vertical; /* Required for line clamping */
+    max-height: 2.8em; /* Roughly 2 lines based on font-size and line-height */
+    line-height: 1.4em; /* Consistent line height for calculation */
 }
 
 .channel-name,
@@ -265,5 +270,8 @@ html, body {
     }
     .sidebar {
         display: none;
+    }
+    .full-screen-container {
+       margin-left: 2.5%;
     }
 }

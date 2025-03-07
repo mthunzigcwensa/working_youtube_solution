@@ -3,22 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - youtube.web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />  
+    <title>@ViewData["Title"] - YouTube</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/2504/2504965.png" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/youtube.web.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/css/_Layout.css" asp-append-version="true" />
-
 
 </head>
 <body>
     <header>
-
         <nav class="navbar navbar-expand-sm navbar-custom">
             <div class="container-fluid">
-                
                 <div class="d-flex align-items-center">
-                    
                     <i class="bi bi-list"></i>
                     <a class="navbar-brand" asp-controller="Video" asp-action="index">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube Logo">
@@ -26,7 +23,6 @@
                         <span>ZA</span>
                     </a>
                 </div>
-
                 <div class="search-bar mx-auto">
                     <input type="text" placeholder="Search">
                     <button>
@@ -34,10 +30,9 @@
                     </button>
                 </div>
                 <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678057-microphone-1024.png" class="microphone-icon" alt="Microphone Icon">
-
                 <div class="navbar-icons ms-auto d-flex align-items-center">
-                    <img src="https://cdn1.iconfinder.com/data/icons/unicons-line-vol-6/24/video-1024.png" class="video-icon" alt="Video Upload Icon" id="videoUploadIcon" data-bs-toggle="modal" data-bs-target="#videoUploadModal">
-                    <img src="https://cdn4.iconfinder.com/data/icons/internet-security-flat-2/32/Internet_Security_Alert_bell_notification_alarm_notice-1024.png" class="notification-icon" alt="Notification Icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/9187/9187515.png" class="video-icon" alt="Video Upload Icon" id="videoUploadIcon" data-bs-toggle="modal" data-bs-target="#videoUploadModal">
+                    <img src="https://cdn-icons-png.flaticon.com/512/891/891012.png" class="notification-icon" alt="Notification Icon">
                     <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="user-avatar" id="userAvatar" data-bs-toggle="modal" data-bs-target="#userModal" alt="User Avatar">
                 </div>
             </div>
@@ -48,80 +43,100 @@
         @RenderBody()
     </main>
 
+    <!-- Video Upload Modal -->
     <div class="modal fade" id="videoUploadModal" tabindex="-1" aria-labelledby="videoUploadModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content youtube-modal">
                 <div class="modal-header">
                     <h5 class="modal-title" id="videoUploadModalLabel">Upload Video</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Click the button below to upload your video.</p>
+                    <p class="modal-text">Click the button below to upload your video.</p>
                     <div class="text-center">
-                        <button id="uploadButton" class="btn btn-primary">Go to Upload</button>
+                        <button id="uploadButton" class="btn btn-primary youtube-btn">Go to Upload</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- User Modal -->
     <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content youtube-modal">
                 <div class="modal-header">
                     <h5 class="modal-title" id="userModalLabel">Account Options</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center" id="viewChannel">
-                            View Channel
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" id="switchAccount">
-                            Switch Account
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" id="logoutOption" style="display: none;">
-                            Logout
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center" id="loginOption" style="display: none;">
-                            Login
-                        </li>
-                    </ul>
+                <div class="modal-body d-flex">
+                    <div class="modal-menu">
+                        <div class="modal-user-info">
+                            
+                            <div class="modal-user-details">
+                                Hey  <p class="modal-user-name" id="userName"> user</p>
+                                <a id="viewChannel" class="modal-channel-link">View your channel</a>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                         
+                            <li class="list-group-item d-flex align-items-center" id="logoutOption" style="display: none;">
+                                <i class="bi bi-box-arrow-right"></i> Sign Out
+                            </li>
+                            <li class="list-group-item d-flex align-items-center" id="loginOption" style="display: none;">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
+                            </li>
+                            <li class="list-group-item d-flex align-items-center" id="RegisterOption" style="display: none;">
+                                <i class="bi bi-person-plus"></i> Register
+                            </li>
+                         
+                            <li class="list-group-item d-flex align-items-center">
+                                <i class="bi bi-gear"></i> Settings
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-channel-preview">
+                        <!-- Placeholder for channel content or thumbnail -->
+                        <img src="https://via.placeholder.com/150" alt="Channel Preview" class="channel-preview-img">
+                        <p class="channel-preview-time">8:15</p>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
-
     <script>
-
         document.addEventListener('DOMContentLoaded', function () {
             const uploadButton = document.getElementById('uploadButton');
             if (uploadButton) {
                 uploadButton.addEventListener('click', function () {
-                    window.location.href = '/video/add'; 
+                    window.location.href = '/video/add';
                 });
             }
-        });
-       
-        document.addEventListener('DOMContentLoaded', function () {
+
             fetch('/Account/GetLoggedInUser')
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         const user = data.data;
-
-                        
                         const loginOption = document.getElementById('loginOption');
                         const logoutOption = document.getElementById('logoutOption');
-                        console.log(user != null)
+                        const registerOption = document.getElementById('RegisterOption');
 
-                       
+                        if (user) {
+                            loginOption.style.display = 'none';
+                            registerOption.style.display = 'none';
+                            logoutOption.style.display = 'block';
+                        } else {
+                            loginOption.style.display = 'block';
+                            registerOption.style.display = 'block';
+                            logoutOption.style.display = 'none';
+                        }
 
                         const userAvatar = document.querySelector('#userAvatar');
                         if (userAvatar && user.profilePic) {
@@ -130,33 +145,36 @@
 
                         const userNameElement = document.querySelector('#userName');
                         if (userNameElement) {
-                            userNameElement.textContent = user.name || "Guest";
+                            userNameElement.textContent = user.name || 'Guest';
                         }
                     } else {
-                        console.error("Failed to fetch user data:", data.message);
+                        console.error('Failed to fetch user data:', data.message);
                     }
                 })
                 .catch(error => {
-                    console.error("Error fetching logged-in user data:", error);
+                    console.error('Error fetching logged-in user data:', error);
                 });
-        });
 
-        document.getElementById('logoutOption').addEventListener('click', function () {
-            window.location.href = '/Account/Logout';
-        });
+            document.getElementById('logoutOption').addEventListener('click', function () {
+                window.location.href = '/Account/Logout';
+            });
 
-        document.getElementById('loginOption').addEventListener('click', function () {
-            window.location.href = '/Account/Login'; 
-        });
+            document.getElementById('loginOption').addEventListener('click', function () {
+                window.location.href = '/Account/Login';
+            });
 
-        document.getElementById('viewChannel').addEventListener('click', function () {
-            window.location.href = '/Channel/index'; 
-        });
+            document.getElementById('RegisterOption').addEventListener('click', function () {
+                window.location.href = '/Account/Register';
+            });
 
-        document.getElementById('switchAccount').addEventListener('click', function () {
-            window.location.href = '/Account/Login';
+            document.getElementById('viewChannel').addEventListener('click', function () {
+                window.location.href = '/Channel/index';
+            });
+
+            document.getElementById('switchAccount').addEventListener('click', function () {
+                window.location.href = '/Account/Login';
+            });
         });
     </script>
 </body>
-
 </html>

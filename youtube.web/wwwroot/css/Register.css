@@ -11,6 +11,7 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', Arial, sans-serif; /* Modern, clean font */
 }
 
 a {
@@ -28,45 +29,62 @@ a {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #181818;
+    background: linear-gradient(135deg, #181818 0%, #121212 100%); /* Subtle gradient background */
     padding: 20px;
     color: #ffffff;
 }
 
     .register-container img {
-        width: 80px;
-        height: 80px;
+        width: 100px; /* Slightly larger logo/icon */
+        height: 100px;
         margin-bottom: 20px;
+        border-radius: 50%; /* Circular logo for modern look */
+        object-fit: cover; /* Ensure image scales properly */
     }
 
     .register-container h2 {
-        font-size: 24px;
-        margin-bottom: 20px;
+        font-size: 28px; /* Larger heading for emphasis */
+        margin-bottom: 10px;
         text-align: center;
-        color: steelblue;
+        color: #4682b4; /* Softer steelblue shade */
+        font-weight: 500; /* Medium weight for balance */
+    }
+
+    .register-container .subheading {
+        font-size: 14px;
+        color: #aaaaaa;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     .register-container form {
-        background-color: #202020;
-        border-radius: 8px;
-        padding: 20px;
-        width: 400px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        background: #252525; /* Lighter background for contrast */
+        border-radius: 12px;
+        padding: 30px;
+        width: 100%;
+        max-width: 450px; /* Slightly wider for better spacing */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Softer, larger shadow */
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 25px; /* Increased spacing */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animations */
     }
+
+        .register-container form:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+        }
 
     .register-container .form-group {
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 8px; /* More space between label and input */
     }
 
     .register-container label {
         font-size: 14px;
-        font-weight: bold;
-        color: #ffffff;
+        font-weight: 600; /* Bolder for clarity */
+        color: #e0e0e0; /* Lighter color for better contrast */
     }
 
     .register-container input[type="text"],
@@ -75,52 +93,76 @@ a {
     .register-container input[type="tel"],
     .register-container select {
         width: 100%;
-        padding: 10px;
-        background-color: #282828;
-        border: 1px solid #404040;
-        border-radius: 4px;
+        padding: 12px;
+        background: #303030; /* Lighter input background */
+        border: 1px solid #454545; /* Subtle border */
+        border-radius: 6px;
         color: #ffffff;
         font-size: 14px;
         box-sizing: border-box;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .register-container select {
         height: 40px;
         font-size: 14px;
+        appearance: none; /* Remove default arrow */
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%23ffffff"><polygon points="0,0 12,0 6,12"/></svg>') no-repeat right 10px center; /* Custom arrow */
+        background-color: #303030;
+        padding-right: 30px; /* Space for arrow */
     }
+
+        .register-container input[type="text"]::placeholder,
+        .register-container input[type="email"]::placeholder,
+        .register-container input[type="password"]::placeholder,
+        .register-container input[type="tel"]::placeholder,
+        .register-container select::placeholder {
+            color: #888888; /* Lighter placeholder */
+            font-style: italic; /* Subtle styling */
+        }
 
         .register-container input:focus,
         .register-container select:focus {
             border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2); /* Glow effect */
             outline: none;
         }
 
     .register-container button {
-        background-color: #1a73e8;
+        background: linear-gradient(90deg, #1a73e8, #4285f4); /* Gradient button */
         color: #ffffff;
         border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        font-size: 14px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 500;
         cursor: pointer;
         width: 100%;
         align-self: center;
+        transition: background 0.3s ease, transform 0.2s ease;
     }
 
         .register-container button:hover {
-            background-color: #1666c1;
+            background: linear-gradient(90deg, #1666c1, #3b78db); /* Darker gradient */
+            transform: scale(1.02); /* Slight scale effect */
+        }
+
+        .register-container button:active {
+            transform: scale(0.98); /* Press effect */
         }
 
     .register-container .text-danger {
         color: #ff4d4d;
         font-size: 12px;
         margin-top: 5px;
-        display: block;
+        text-align: center;
     }
 
     .register-container hr {
         border-color: #404040;
         margin: 20px 0;
+        border-style: solid;
+        opacity: 0.5;
     }
 
     .register-container .text-center {
@@ -131,11 +173,109 @@ a {
 
         .register-container .text-center a {
             color: #1a73e8;
-            text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
             .register-container .text-center a:hover {
-                color: #1666c1;
+                color: #4285f4;
                 text-decoration: underline;
             }
+
+/* Responsive Design */
+
+/* For screens smaller than 600px (e.g., tablets) */
+@media screen and (max-width: 600px) {
+    .register-container {
+        padding: 15px;
+    }
+
+        .register-container img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .register-container form {
+            padding: 20px;
+            max-width: 350px;
+            gap: 20px;
+        }
+
+        .register-container h2 {
+            font-size: 24px;
+        }
+
+        .register-container .subheading {
+            font-size: 13px;
+        }
+
+        .register-container label {
+            font-size: 13px;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="email"],
+        .register-container input[type="password"],
+        .register-container input[type="tel"],
+        .register-container select {
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .register-container button {
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .register-container .text-center {
+            font-size: 13px;
+        }
+}
+
+/* For screens smaller than 400px (e.g., mobile phones) */
+@media screen and (max-width: 400px) {
+    .register-container {
+        padding: 10px;
+    }
+
+        .register-container img {
+            width: 70px;
+            height: 70px;
+        }
+
+        .register-container form {
+            padding: 15px;
+            max-width: 300px;
+            gap: 15px;
+        }
+
+        .register-container h2 {
+            font-size: 20px;
+        }
+
+        .register-container .subheading {
+            font-size: 12px;
+        }
+
+        .register-container label {
+            font-size: 12px;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="email"],
+        .register-container input[type="password"],
+        .register-container input[type="tel"],
+        .register-container select {
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        .register-container button {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .register-container .text-center {
+            font-size: 12px;
+        }
+}

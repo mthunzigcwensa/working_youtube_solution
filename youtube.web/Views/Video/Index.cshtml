@@ -5,7 +5,7 @@
 
 
 @{
-    ViewData["Title"] = "Video List";
+    ViewData["Title"] = "Videos";
     <link rel="stylesheet" href="~/css/videoslist.css" asp-append-version="true" />
     var claimsIdentity = (ClaimsIdentity)User.Identity;
     var SuserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;

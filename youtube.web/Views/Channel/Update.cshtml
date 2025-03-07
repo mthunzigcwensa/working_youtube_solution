@@ -1,11 +1,9 @@
 ﻿@model youtube.Domain.Entities.ChannelData
 
-
 @{
     ViewData["Title"] = "Update Channel";
     <link rel="stylesheet" href="~/css/siteFive.css" asp-append-version="true" />
 }
-
 
 <div class="full-screen-container">
     <div class="sidebar">
@@ -28,89 +26,128 @@
     </div>
     <form asp-action="Update" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
-    <div class="content-container">
-        <div class="header">
-            <h2>Channel customisation</h2>
-            <div class="tabs-and-buttons">
-                <ul class="nav-tabs">
-                    <li class="tab active" data-tab="profile">Profile</li>
-                    <li class="tab" data-tab="home-tab">Home tab</li>
-                </ul>
-                <div class="header-buttons">
-                    <button class="view-channel">View channel</button>
-                    <button class="cancel">Cancel</button>
-                    <button class="publish">Publish</button>
+        <div class="content-container">
+            <div class="header">
+                <h2>Channel Customisation</h2>
+                <div class="tabs-and-buttons">
+                    <ul class="nav-tabs">
+                        <li class="tab active" data-tab="profile">Profile</li>
+                        <li class="tab" data-tab="home-tab">Home tab</li>
+                    </ul>
+                    <div class="header-buttons">
+                        <button class="view-channel">View channel</button>
+                        <button class="cancel">Cancel</button>
+                        <button class="publish">Publish</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="profile" class="tab-content active">
-            <div class="customisation-section">
-                <div class="customisation-item">
-                    <h3>Banner image</h3>
-                    <p>This image will appear across the top of your channel.</p>
-                    <div class="banner-container">
-                        <div class="image-placeholder">
+            <div id="profile" class="tab-content active">
+                <div class="customisation-section">
+                    <div class="customisation-item">
+                        <h3>Banner image</h3>
+                        <p>This image will appear across the top of your channel.</p>
+                        <div class="banner-container">
+                            <div class="image-placeholder" id="bannerImagePlaceholder">
                                 <img src="@(!string.IsNullOrEmpty(Model.BannerImageUrl) ? Model.BannerImageUrl : "https://images.pexels.com/photos/1260727/pexels-photo-1260727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")" alt="Banner Image" class="image-preview">
-                        </div>
-                        <div class="image-options-container">
-                            <p>For the best results on all devices, use an image that's at least 2048 x 1152 pixels and 6 MB or less.</p>
-                            <div class="image-options">
-                                    <input asp-for="BannerImageUrl" type="file" name="BannerImage" accept="image/*" />
-                                <button>Remove</button>
+                            </div>
+                            <div class="image-options-container">
+                                <p>For the best results on all devices, use an image that's at least 2048 x 1152 pixels and 6 MB or less.</p>
+                                <div class="image-options">
+                                    <input asp-for="BannerImageUrl" type="file" name="BannerImage" accept="image/*" id="bannerImageInput" />
+                                    <button type="button" class="remove-banner">Remove</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="customisation-item">
-                    <h3>Picture</h3>
-                    <p>Your profile picture will appear where your channel is presented on YouTube.</p>
-                    <div class="picture-container">
-                        <div class="profile-image-placeholder">
+                    <div class="customisation-item">
+                        <h3>Picture</h3>
+                        <p>Your profile picture will appear where your channel is presented on YouTube.</p>
+                        <div class="picture-container">
+                            <div class="profile-image-placeholder" id="profileImagePlaceholder">
                                 <img src="@(!string.IsNullOrEmpty(Model.ProfilePictureUrl) ? Model.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="Profile Picture" class="profile-preview">
-                        </div>
-                        <div class="image-options-container">
-                            <p>It's recommended that you use a picture that's at least 98 x 98 pixels and 4 MB or less.</p>
-                            <div class="image-options">
-                                    <input asp-for="ProfilePictureUrl" type="file" name="ProfilePicture" accept="image/*" />
-                                <button>Remove</button>
+                            </div>
+                            <div class="image-options-container">
+                                <p>It's recommended that you use a picture that's at least 98 x 98 pixels and 4 MB or less.</p>
+                                <div class="image-options">
+                                    <input asp-for="ProfilePictureUrl" type="file" name="ProfilePicture" accept="image/*" id="profileImageInput" />
+                                    <button type="button" class="remove-profile">Remove</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="customisation-item">
-                    <h3>Name</h3>
-                    <p>Choose a channel name that represents you and your content. Changes made to your name and picture are only visible on YouTube and not on other Google services. You can change your name twice in 14 days.</p>
+                    <div class="customisation-item">
+                        <h3>Name</h3>
+                        <p>Choose a channel name that represents you and your content. Changes made to your name and picture are only visible on YouTube and not on other Google services. You can change your name twice in 14 days.</p>
                         <input type="text" asp-for="Name" class="input-field">
-                </div>
+                    </div>
 
-                <div class="customisation-item">
-                    <h3>Handle</h3>
-                    <p>Choose your unique handle by adding letters and numbers. You can change your handle back within 14 days. Handles can be changed twice every 14 days.</p>
+                    <div class="customisation-item">
+                        <h3>Handle</h3>
+                        <p>Choose your unique handle by adding letters and numbers. You can change your handle back within 14 days. Handles can be changed twice every 14 days.</p>
                         <input type="text" asp-for="Handle" class="input-field">
-                    <p>https://localhost:7118/userchanel/@@mthunzicgwensa</p>
-                </div>
+                        <p>https://localhost:7118/userchanel/@@mthunzicgwensa</p>
+                    </div>
 
-                <div class="customisation-item">
-                    <h3>Description</h3>
+                    <div class="customisation-item">
+                        <h3>Description</h3>
                         <textarea asp-for="Description" class="input-field" rows="4"></textarea>
-                </div>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
             </div>
 
-
+            <div id="home-tab" class="tab-content">
+                <p>This is the content for the Home tab.</p>
+            </div>
         </div>
-
-        <div id="home-tab" class="tab-content">
-            <p>This is the content for the Home tab.</p>
-        </div>
-    </div>
     </form>
 </div>
+
 <script src="~/js/tabs.js"></script>
+<script>
+    // Function to preview uploaded images
+    function previewImage(inputId, placeholderId) {
+        const input = document.getElementById(inputId);
+        const placeholder = document.getElementById(placeholderId);
+        const previewImg = placeholder.querySelector('img');
+
+        input.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // Initialize preview for banner and profile images
+    document.addEventListener('DOMContentLoaded', function () {
+        previewImage('bannerImageInput', 'bannerImagePlaceholder');
+        previewImage('profileImageInput', 'profileImagePlaceholder');
+
+        // Remove image functionality
+        document.querySelector('.remove-banner').addEventListener('click', function () {
+            const placeholder = document.getElementById('bannerImagePlaceholder');
+            const previewImg = placeholder.querySelector('img');
+            previewImg.src = 'https://images.pexels.com/photos/1260727/pexels-photo-1260727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+            document.getElementById('bannerImageInput').value = ''; // Clear the input
+        });
+
+        document.querySelector('.remove-profile').addEventListener('click', function () {
+            const placeholder = document.getElementById('profileImagePlaceholder');
+            const previewImg = placeholder.querySelector('img');
+            previewImg.src = 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
+            document.getElementById('profileImageInput').value = ''; // Clear the input
+        });
+    });
+</script>
 
 @section Scripts {
     @{

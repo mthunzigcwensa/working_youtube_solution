@@ -129,3 +129,214 @@ body {
         display: none;
     }
 }
+
+/* Custom Modal Styles */
+.youtube-modal {
+    background-color: #212121;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+    .youtube-modal .modal-header {
+        background-color: #212121;
+        border-bottom: 1px solid #333;
+        padding: 15px;
+    }
+
+    .youtube-modal .modal-title {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .youtube-modal .modal-body {
+        padding: 15px;
+        display: flex;
+        gap: 20px;
+    }
+
+.modal-menu {
+    flex: 1;
+    min-width: 0;
+}
+
+.modal-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.modal-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.modal-user-details {
+    flex: 1;
+    overflow: hidden;
+}
+
+.modal-user-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal-user-handle {
+    font-size: 12px;
+    color: #aaaaaa;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal-channel-link {
+    font-size: 12px;
+    color: #1a73e8;
+    text-decoration: none;
+    display: block;
+    margin-top: 2px;
+}
+
+    .modal-channel-link:hover {
+        cursor: pointer;
+    }
+
+.list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.2s ease;
+}
+
+    .list-group-item:hover {
+        background-color: #2e2e2e;
+        cursor: pointer;
+    }
+
+    .list-group-item i {
+        font-size: 16px;
+        color: #bbbbbb;
+    }
+
+.modal-channel-preview {
+    min-width: 150px;
+    max-width: 150px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: none; /* Hidden by default, show only for larger screens */
+}
+
+.channel-preview-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.channel-preview-time {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.youtube-btn {
+    background: linear-gradient(90deg, #1a73e8, #4285f4);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+    .youtube-btn:hover {
+        background: linear-gradient(90deg, #1666c1, #3b78db);
+        transform: scale(1.02);
+    }
+
+    .youtube-btn:active {
+        transform: scale(0.98);
+    }
+
+.modal-text {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-dialog.modal-lg {
+        max-width: 90%;
+    }
+
+    .modal-body {
+        flex-direction: column;
+    }
+
+    .modal-channel-preview {
+        display: none; /* Hide preview on smaller screens */
+        min-width: 0;
+        max-width: 0;
+    }
+
+    .modal-menu {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-user-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .modal-user-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    .modal-user-name,
+    .modal-user-handle {
+        font-size: 12px;
+    }
+
+    .modal-channel-link {
+        font-size: 11px;
+    }
+
+    .list-group-item {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+
+        .list-group-item i {
+            font-size: 14px;
+        }
+
+    .youtube-btn {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+}

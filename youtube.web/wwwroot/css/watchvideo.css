@@ -1,9 +1,9 @@
 ﻿* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensures no extra padding/margins are added */
-    scrollbar-width: none; /* Disable the scrollbar */
-    scrollbar-color: transparent transparent; /* Make the track and thumb transparent */
+    box-sizing: border-box;
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
 }
 
 html, body {
@@ -16,10 +16,11 @@ html, body {
 a {
     text-decoration: none;
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
 ::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar width */
-    background: transparent; /* Optional: transparent background */
+    width: 0;
+    background: transparent;
 }
 
 .container {
@@ -53,28 +54,32 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+    background-color: #181818; /* Match the dark background from the screenshot */
 }
 
 .channel-details {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 10px; /* Tighter spacing between avatar and text */
 }
 
 .channel-avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    object-fit: cover; /* Ensure the avatar fills the circle */
 }
 
 .channel-text {
     display: flex;
     flex-direction: column;
+    justify-content: center; /* Center text vertically */
 }
 
 .channel-name {
     font-size: 16px;
     color: white;
+    margin-bottom: 2px; /* Reduce space between name and subscribers */
 }
 
 .subscribers-count {
@@ -91,13 +96,19 @@ a {
     font-weight: bold;
     cursor: pointer;
     border-radius: 20px;
-    margin-left: 20px; /* Ensure space between Subscribe and Action Buttons */
+    margin-left: 20px;
+    transition: background-color 0.3s;
 }
+
+    .subscribe-btn:hover {
+        background-color: #e0e0e0; /* Lighten on hover */
+    }
 
 /* Align action buttons next to Subscribe button */
 .action-buttons {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    align-items: center;
 }
 
     .action-buttons button {
@@ -109,6 +120,7 @@ a {
         display: flex;
         align-items: center;
         gap: 5px;
+        padding: 5px;
     }
 
     .action-buttons i {
@@ -159,26 +171,56 @@ a {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    padding: 10px;
+    background-color: #202020;
+    border-radius: 10px;
 }
 
-.user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
+    .add-comment .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
 
 .comment-input {
-    width: 100%;
+    flex-grow: 1;
     padding: 10px;
-    background-color: #2a2a2a;
-    border: none;
-    border-radius: 4px;
+    font-size: 14px;
     color: white;
+    background-color: #333333;
+    border: 1px solid #555555;
+    border-radius: 5px;
+    outline: none;
+    transition: border 0.3s;
+    width: 260px;
 }
 
     .comment-input::placeholder {
-        color: #999;
+        color: #bbb;
+    }
+
+    .comment-input:focus {
+        border: 1px solid #888888;
+    }
+
+.btn-primary {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: #1a73e8;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-shrink: 0;
+}
+
+    .btn-primary:hover {
+        background-color: #135abd;
     }
 
 /* Individual Comment */
@@ -283,14 +325,12 @@ a {
         overflow: hidden;
     }
 
-/* Channel name styling */
 .channel-name {
     font-size: 12px;
     color: white;
     margin-bottom: 3px;
 }
 
-/* Views and upload info styling */
 .views-info {
     font-size: 12px;
     color: #999;
@@ -299,89 +339,279 @@ a {
 
 .form-group {
     display: flex;
-    align-items: center; /* Vertically align input and button */
-    gap: 10px; /* Add space between input and button */
-    width: 100%; /* Ensure the group takes up full width */
-}
-.add-comment {
-    display: flex;
     align-items: center;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #202020; /* Add a background for contrast */
-    border-radius: 10px;
-}
-
-.add-comment .user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 15px;
-    flex-shrink: 0; /* Prevent avatar from shrinking */
-}
-
-.comment-input {
-    flex-grow: 1; /* Make the input field take up available space */
-    padding: 10px;
-    font-size: 14px;
-    color: white;
-    background-color: #333333; /* Match dark theme */
-    border: 1px solid #555555;
-    border-radius: 5px;
-    outline: none;
-    transition: border 0.3s;
-    width: 260px;
-}
-
-
-.comment-input::placeholder {
-    color: #bbb; /* Placeholder color for better readability */
-}
-
-.comment-input:focus {
-    border: 1px solid #888888;
-}
-
-.btn-primary {
-    padding: 10px 15px;
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    background-color: #1a73e8; /* Primary blue color */
-    border: none;
-    border-radius: 5px;
-    margin-left: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    flex-shrink: 0; /* Prevent the button from shrinking */
-}
-
-.btn-primary:hover {
-    background-color: #135abd; /* Darker shade on hover */
+    gap: 10px;
+    width: 100%;
 }
 
 /* Responsive Design */
+
+/* For screens smaller than 850px (e.g., tablets and smaller laptops) */
 @media screen and (max-width: 850px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .main-content {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .suggested-videos {
+        display: none;
+    }
+
+    .video-description h1 {
+        font-size: 18px;
+    }
+
+    .channel-info-wrapper {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px; /* Space between channel details and buttons */
+        padding: 10px 0;
+    }
+
+    .channel-details {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Tighter spacing to keep it cohesive */
+        width: 100%;
+    }
+
+    .channel-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .channel-name {
+        font-size: 14px;
+    }
+
+    .subscribers-count {
+        font-size: 12px;
+    }
+
+    .subscribe-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+        margin-left: 0;
+        width: auto;
+    }
+
+    .action-buttons {
+        gap: 15px;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap; /* Allow wrapping if needed */
+    }
+
+        .action-buttons button {
+            font-size: 14px;
+            padding: 5px;
+        }
+
+        .action-buttons i {
+            font-size: 16px;
+        }
+
+    .description-box {
+        padding: 10px;
+    }
+
+    .views-info,
+    .video-tags p,
+    .video-description-text {
+        font-size: 13px;
+    }
+
+    .comments-section h3 {
+        font-size: 14px;
+    }
+
     .add-comment {
         flex-direction: column;
         align-items: flex-start;
+        padding: 8px;
     }
+
+        .add-comment .user-avatar {
+            width: 40px;
+            height: 40px;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
 
     .comment-input {
         width: 100%;
         margin-top: 10px;
+        font-size: 13px;
     }
 
     .btn-primary {
         margin-left: 0;
         margin-top: 10px;
+        padding: 8px 12px;
+        font-size: 12px;
     }
 
-    .suggested-videos{
+    .comment-avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .comment-user {
+        font-size: 13px;
+    }
+
+    .comment-time,
+    .comment-content {
+        font-size: 12px;
+    }
+
+    .comment-actions {
+        gap: 8px;
+        font-size: 12px;
+    }
+
+        .comment-actions i {
+            font-size: 14px;
+        }
+    .action-buttons {
         display: none;
     }
+}
 
-    .main-content{
+/* For screens smaller than 500px (e.g., mobile phones) */
+@media screen and (max-width: 500px) {
+    .container {
+        padding: 5px;
+    }
+
+    .main-content {
+        padding-right: 0;
+    }
+
+    .video-description {
+        padding: 10px 0;
+    }
+
+        .video-description h1 {
+            font-size: 16px;
+        }
+
+    .channel-info-wrapper {
+        padding: 5px 0;
+        gap: 10px;
+    }
+
+    .channel-details {
+        display: flex;
+        align-items: center;
+        gap: 5px; /* Even tighter spacing for mobile */
         width: 100%;
+    }
+
+    .channel-avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .channel-name {
+        font-size: 13px;
+    }
+
+    .subscribers-count {
+        font-size: 11px;
+    }
+
+    .subscribe-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+
+    .action-buttons {
+        gap: 10px;
+    }
+
+        .action-buttons button {
+            font-size: 12px;
+            padding: 3px;
+        }
+
+        .action-buttons i {
+            font-size: 14px;
+        }
+
+    .description-box {
+        padding: 8px;
+        margin-top: 10px;
+    }
+
+    .views-info,
+    .video-tags p,
+    .video-description-text {
+        font-size: 12px;
+    }
+
+    .comments-section {
+        margin-top: 15px;
+        padding: 5px 0;
+    }
+
+        .comments-section h3 {
+            font-size: 13px;
+        }
+
+    .add-comment {
+        padding: 5px;
+    }
+
+        .add-comment .user-avatar {
+            width: 35px;
+            height: 35px;
+            margin-bottom: 8px;
+        }
+
+    .comment-input {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .btn-primary {
+        padding: 6px 10px;
+        font-size: 11px;
+        margin-top: 8px;
+    }
+
+    .comment {
+        margin-bottom: 15px;
+    }
+
+    .comment-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    .comment-user {
+        font-size: 12px;
+    }
+
+    .comment-time,
+    .comment-content {
+        font-size: 11px;
+    }
+
+    .comment-actions {
+        gap: 5px;
+        font-size: 11px;
+    }
+
+        .comment-actions i {
+            font-size: 12px;
+        }
+    .action-buttons {
+        display: none;
     }
 }

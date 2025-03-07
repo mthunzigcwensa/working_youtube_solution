@@ -1,5 +1,12 @@
-﻿@model youtube.Domain.ViewModels.ChannelVM
+﻿@using System.Security.Claims
+@model youtube.Domain.ViewModels.ChannelVM
 <link rel="stylesheet" href="~/css/siteFour.css" asp-append-version="true" />
+@{
+    ViewData["Title"] = "Channel";
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var userid = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+
 <div class="full-screen-container">
 
     <div class="sidebar">

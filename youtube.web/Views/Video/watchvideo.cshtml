@@ -1,7 +1,13 @@
 ﻿@using youtube.Application.Services.Implementation
 @using youtube.Application.Services.Interfaces
 @using youtube.Domain.Entities
+@using System.Security.Claims
 @model Video
+@{
+    ViewData["Title"] = "Watching";
+      var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var SuserId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
 <link rel="stylesheet" href="~/css/watchvideo.css" asp-append-version="true" />
 <div class="container">
     <div class="main-content">
@@ -15,6 +21,22 @@
         <div class="video-description">
             <h1>@Model.Title</h1>
             <div class="channel-info-wrapper">
+                @if (SuserId == Model.UserId)
+                {
+                    <a href="@Url.Action("index", "Channel", new { id = Model.UserId })">
+                        <div class="channel-details">
+                            <img src="@(!string.IsNullOrEmpty(Model.ChannelData.ProfilePictureUrl) ? Model.ChannelData.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")"
+                                 alt="Channel Avatar"
+                                 class="channel-avatar">
+                            <div class="channel-text">
+                                <span class="channel-name">@Model.ChannelData.Handle</span>
+                                <span class="subscribers-count">0 subscribers</span>
+                            </div>
+                        </div>
+                    </a>
+                }
+                else{
+                <a href="@Url.Action("channelData", "Channel", new { id = Model.UserId })">
                 <div class="channel-details">
                     <img src="@(!string.IsNullOrEmpty(Model.ChannelData.ProfilePictureUrl) ? Model.ChannelData.ProfilePictureUrl : "https://cdn-icons-png.flaticon.com/512/847/847969.png")"
                          alt="Channel Avatar"
@@ -24,7 +46,8 @@
                         <span class="subscribers-count">0 subscribers</span>
                     </div>
                 </div>
-
+                </a>
+                }
                 <button class="subscribe-btn">Subscribe</button>
 
                 <div class="action-buttons">

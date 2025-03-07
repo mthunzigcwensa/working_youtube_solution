@@ -1,10 +1,9 @@
-﻿
-* {
+﻿* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensures no extra padding/margins are added */
-    scrollbar-width: none; /* Disable the scrollbar */
-    scrollbar-color: transparent transparent; /* Make the track and thumb transparent */
+    box-sizing: border-box;
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
 }
 
 html, body {
@@ -12,15 +11,17 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', Arial, sans-serif; /* Use a modern font */
 }
 
 a {
     text-decoration: none;
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
 ::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar width */
-    background: transparent; /* Optional: transparent background */
+    width: 0;
+    background: transparent;
 }
 
 .login-container {
@@ -28,59 +29,85 @@ a {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #181818;
+    background: linear-gradient(135deg, #181818 0%, #121212 100%); /* Subtle gradient background */
     padding: 20px;
     color: #ffffff;
 }
 
     .login-container form {
-        background-color: #202020;
-        border-radius: 8px;
-        padding: 20px;
-        width: 400px; /* Scoped width */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        background: #252525; /* Slightly lighter than the background for contrast */
+        border-radius: 12px;
+        padding: 30px;
+        width: 100%;
+        max-width: 400px; /* Scoped width with max-width for better scaling */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Softer, larger shadow for depth */
         display: flex;
-        flex-direction: column; /* Stack elements vertically */
-        gap: 20px; /* Add space between elements */
+        flex-direction: column;
+        gap: 25px; /* Increased spacing between elements */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animations */
     }
 
+        .login-container form:hover {
+            transform: translateY(-5px); /* Slight lift effect on hover */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+        }
+
     .login-container h2 {
-        font-size: 24px;
+        font-size: 28px; /* Slightly larger for better hierarchy */
+        margin-bottom: 10px;
+        text-align: center;
+        color: #ffffff;
+        font-weight: 500; /* Medium weight for modern look */
+    }
+
+    .login-container .subheading {
+        font-size: 14px;
+        color: #aaaaaa;
+        text-align: center;
         margin-bottom: 20px;
-        text-align: center; /* Center-align the heading */
     }
 
     .login-container .form-group {
         display: flex;
-        flex-direction: column; /* Stack label and input vertically */
-        gap: 5px; /* Space between label and input */
+        flex-direction: column;
+        gap: 8px; /* Slightly more space between label and input */
     }
 
     .login-container label {
         font-size: 14px;
-        font-weight: bold;
-        color: #ffffff;
+        font-weight: 600; /* Bolder labels for emphasis */
+        color: #e0e0e0; /* Slightly lighter for better contrast */
     }
 
     .login-container input[type="text"],
     .login-container input[type="password"] {
         width: 100%;
-        padding: 10px;
-        background-color: #282828;
-        border: 1px solid #404040;
-        border-radius: 4px;
+        padding: 12px;
+        background: #303030; /* Slightly lighter input background */
+        border: 1px solid #454545; /* Subtle border */
+        border-radius: 6px;
         color: #ffffff;
         font-size: 14px;
         box-sizing: border-box;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
+
+        .login-container input[type="text"]::placeholder,
+        .login-container input[type="password"]::placeholder {
+            color: #888888; /* Lighter placeholder text */
+            font-style: italic; /* Subtle styling for placeholders */
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #1a73e8;
+            box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.2); /* Subtle glow effect on focus */
+            outline: none;
+        }
 
     .login-container input[type="checkbox"] {
-        margin-right: 5px;
-    }
-
-    .login-container input:focus {
-        border-color: #1a73e8;
-        outline: none;
+        margin-right: 8px;
+        accent-color: #1a73e8; /* Modern checkbox color */
     }
 
     .login-container .form-check {
@@ -91,23 +118,31 @@ a {
     .login-container .form-check-label {
         margin-left: 5px;
         font-size: 14px;
-        color: #ffffff;
+        color: #cccccc;
+        cursor: pointer;
     }
 
     .login-container button {
-        background-color: #1a73e8;
+        background: linear-gradient(90deg, #1a73e8, #4285f4); /* Gradient button */
         color: #ffffff;
         border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
-        font-size: 14px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 500;
         cursor: pointer;
-        width: 100%; /* Button spans full width */
-        align-self: center; /* Center-align button */
+        width: 100%;
+        align-self: center;
+        transition: background 0.3s ease, transform 0.2s ease;
     }
 
         .login-container button:hover {
-            background-color: #1666c1;
+            background: linear-gradient(90deg, #1666c1, #3b78db); /* Darker gradient on hover */
+            transform: scale(1.02); /* Slight scale effect */
+        }
+
+        .login-container button:active {
+            transform: scale(0.98); /* Slight press effect */
         }
 
     .login-container .text-danger {
@@ -115,11 +150,14 @@ a {
         font-size: 12px;
         margin-top: 5px;
         display: block;
+        text-align: center;
     }
 
     .login-container hr {
         border-color: #404040;
         margin: 20px 0;
+        border-style: solid;
+        opacity: 0.5;
     }
 
     .login-container p {
@@ -127,3 +165,103 @@ a {
         font-size: 14px;
         color: #aaaaaa;
     }
+
+        .login-container p a {
+            color: #1a73e8;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+            .login-container p a:hover {
+                color: #4285f4;
+            }
+
+/* Responsive Design */
+
+/* For screens smaller than 600px (e.g., tablets) */
+@media screen and (max-width: 600px) {
+    .login-container {
+        padding: 15px;
+    }
+
+        .login-container form {
+            padding: 20px;
+            max-width: 350px;
+            gap: 20px;
+        }
+
+        .login-container h2 {
+            font-size: 24px;
+        }
+
+        .login-container .subheading {
+            font-size: 13px;
+        }
+
+        .login-container label {
+            font-size: 13px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .login-container .form-check-label {
+            font-size: 13px;
+        }
+
+        .login-container button {
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .login-container p {
+            font-size: 13px;
+        }
+}
+
+/* For screens smaller than 400px (e.g., mobile phones) */
+@media screen and (max-width: 400px) {
+    .login-container {
+        padding: 10px;
+    }
+
+        .login-container form {
+            padding: 15px;
+            max-width: 300px;
+            gap: 15px;
+        }
+
+        .login-container h2 {
+            font-size: 20px;
+        }
+
+        .login-container .subheading {
+            font-size: 12px;
+        }
+
+        .login-container label {
+            font-size: 12px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        .login-container .form-check-label {
+            font-size: 12px;
+        }
+
+        .login-container button {
+            padding: 8px 12px;
+            font-size: 13px;
+        }
+
+        .login-container p {
+            font-size: 12px;
+        }
+}

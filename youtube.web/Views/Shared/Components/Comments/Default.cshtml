@@ -1,6 +1,10 @@
-﻿@using youtube.Domain.Entities
+﻿@using System.Security.Claims
+@using youtube.Domain.Entities
 @model IEnumerable<Comment>
-
+@{
+    var claimsIdentity = (ClaimsIdentity)User.Identity;
+    var userid = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
 
     <h3>@(Model?.Count() ?? 0) Comment(s)</h3>
 
@@ -9,28 +13,60 @@
     {
         foreach (var comment in Model)
         {
+           
             <div class="comment">
                 <div class="comment-user-info">
                     <!-- Avatar image -->
-                <img src="@(!string.IsNullOrEmpty(@comment.ApplicationUser.ProfilePic) ? @comment.ApplicationUser.ProfilePic : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="User Avatar" class="comment-avatar">
-                    
+                @if (userid == comment.UserId){
+                    <a href="@Url.Action("index", "Channel", new { id = @comment.UserId  })">
+                        <img src="@(!string.IsNullOrEmpty(@comment.ApplicationUser.ProfilePic) ? @comment.ApplicationUser.ProfilePic : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="User Avatar" class="comment-avatar">
+                    </a>
                     <!-- Comment details -->
                     <div class="comment-text">
-                        <p class="comment-user">
-                           @@@comment.ApplicationUser?.UserName
-                            <span class="comment-time">
-                                @comment.TimeAgo
-                            </span>
-                        </p>
+                        <a href="@Url.Action("index", "Channel", new { id = @comment.UserId  })">
+                            <p class="comment-user">
+                                @@@comment.ApplicationUser?.UserName
+                                <span class="comment-time">
+                                    @comment.TimeAgo
+                                </span>
+                            </p>
+                        </a>
                         <p class="comment-content">@comment.userComment</p>
 
                         <!-- Comment actions -->
                         <div class="comment-actions">
-                            <button><i class="bi bi-hand-thumbs-up"></i> 11</button>
+                            <button><i class="bi bi-hand-thumbs-up"></i> </button>
                             <button><i class="bi bi-hand-thumbs-down"></i></button>
                             <button class="reply-btn">Reply</button>
                         </div>
                     </div>
+                }
+                else{
+                    <a href="@Url.Action("channelData", "Channel", new { id = @comment.UserId })">
+                        <img src="@(!string.IsNullOrEmpty(@comment.ApplicationUser.ProfilePic) ? @comment.ApplicationUser.ProfilePic : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="User Avatar" class="comment-avatar">
+                    </a>
+                    <!-- Comment details -->
+                    <div class="comment-text">
+                        <a href="@Url.Action("channelData", "Channel", new { id = @comment.ApplicationUser.Id })">
+                            <p class="comment-user">
+                                @@@comment.ApplicationUser?.UserName
+                                <span class="comment-time">
+                                    @comment.TimeAgo
+                                </span>
+                            </p>
+                        </a>
+                        <p class="comment-content">@comment.userComment</p>
+
+                        <!-- Comment actions -->
+                        <div class="comment-actions">
+                            <button><i class="bi bi-hand-thumbs-up"></i> </button>
+                            <button><i class="bi bi-hand-thumbs-down"></i></button>
+                            <button class="reply-btn">Reply</button>
+                        </div>
+                    </div>
+                }
+                
+              
                 </div>
             </div>
         }
