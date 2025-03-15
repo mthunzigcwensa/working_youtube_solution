@@ -12,7 +12,7 @@ using youtube.web.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.Limits.MaxRequestBodySize = 1073741824; // Set to 100 MB (adjust as needed)
+    options.Limits.MaxRequestBodySize = 1073741824;
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -45,7 +45,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 1073741824; // Set to 100 MB (adjust as needed)
+    options.MultipartBodyLengthLimit = 1073741824;
 });
 
 var app = builder.Build();
