@@ -42,17 +42,17 @@ namespace youtube.web.Controllers
 
             if (ModelState.IsValid)
             {
-                // Assign the postedBy property with the current date and time
+              
                 comment.postedBy = DateTime.UtcNow;
 
-                // Call the service to add the comment
+                
                 await _commentService.AddAsync(comment);
 
-                // Redirect to a suitable page (e.g., back to the video details page)
+               
                 return RedirectToAction("watchvideo", "Video", new { videoId = comment.VideoId });
             }
 
-            // If model validation fails, return to the form
+          
 
             return RedirectToAction("watchvideo", "Video", new { videoId = videoId });
         }

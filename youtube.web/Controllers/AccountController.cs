@@ -8,7 +8,6 @@ using youtube.Application.Services.Implementation;
 using youtube.Application.Services.Interfaces;
 using youtube.Domain.Entities;
 using youtube.Domain.ViewModels;
-using youtube.web.Services;
 
 namespace youtube.web.Controllers
 {
@@ -19,7 +18,7 @@ namespace youtube.web.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IChannelService _channelService;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -27,7 +26,7 @@ namespace youtube.web.Controllers
             SignInManager<ApplicationUser> signInManager,
             IUnitOfWork unitOfWork,
             IChannelService channelService,
-            UserService userService
+            IUserService userService
 
 
             )
@@ -124,7 +123,7 @@ namespace youtube.web.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Assign role
+                    
                     if (!string.IsNullOrEmpty(registerVM.Role))
                     {
                         await _userManager.AddToRoleAsync(user, registerVM.Role);
@@ -134,10 +133,10 @@ namespace youtube.web.Controllers
                         await _userManager.AddToRoleAsync(user, SD.Role_User);
                     }
 
-                    // Create channel
+                    
                     await _channelService.CreateChannelAsync(user.Id, user.Name);
 
-                    // Automatically log in the user
+                    
                     var signInResult = await _signInManager.PasswordSignInAsync(user.UserName, registerVM.Password, isPersistent: false, lockoutOnFailure: false);
 
                     if (signInResult.Succeeded)
@@ -150,7 +149,7 @@ namespace youtube.web.Controllers
                         return RedirectToAction("Login", "Account");
                     }
 
-                    // Redirect based on role or RedirectUrl
+                    
                     if (await _userManager.IsInRoleAsync(user, SD.Role_Admin))
                     {
                         return RedirectToAction("Index", "Video");

@@ -1,10 +1,11 @@
 ﻿using System.Security.Claims;
 using youtube.Application.Common.Interfaces;
+using youtube.Application.Services.Interfaces;
 using youtube.Domain.Entities;
 
-namespace youtube.web.Services
+namespace youtube.Application.Services.Implementation
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IApplicationUserRepository _applicationUserRepository;
 

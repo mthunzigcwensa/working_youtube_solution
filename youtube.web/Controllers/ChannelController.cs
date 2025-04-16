@@ -15,24 +15,15 @@ namespace youtube.web.Controllers
 
         private readonly IChannelService _channelService;
         private readonly IVideoService _videoService;
-        private readonly BlobServiceClient _blobServiceClient;
-        private readonly string _profilePictureContainerName;
-        private readonly string _bannerContainerName;
+       
         public ChannelController(IUnitOfWork unitOfWork, IChannelService channelService, IVideoService videoService, IConfiguration configuration)
         {
 
             _channelService = channelService;
             _videoService = videoService;
-            var connectionString = configuration["AzureBlobStorage:ConnectionString"];
-            _profilePictureContainerName = configuration["AzureBlobStorage:ProfilePictureContainerName"];
-            _bannerContainerName = configuration["AzureBlobStorage:BannerContainerName"];
-            _blobServiceClient = new BlobServiceClient(connectionString);
+            
 
-            // Ensure containers exist (run once during startup or here for simplicity)
-            _blobServiceClient.GetBlobContainerClient(_profilePictureContainerName)
-                .CreateIfNotExistsAsync().GetAwaiter().GetResult();
-            _blobServiceClient.GetBlobContainerClient(_bannerContainerName)
-                .CreateIfNotExistsAsync().GetAwaiter().GetResult();
+           
         }
         public async Task<IActionResult> Index()
         {
@@ -112,45 +103,9 @@ namespace youtube.web.Controllers
             string bannerImageUrl = null;
             string profilePictureUrl = null;
 
-            // Handle banner image upload
-            if (BannerImage != null && BannerImage.Length > 0)
-            {
-                var bannerContainerClient = _blobServiceClient.GetBlobContainerClient(_bannerContainerName);
-                string bannerBlobName = $"{Guid.NewGuid()}_{Path.GetFileName(BannerImage.FileName)}";
-                var bannerBlobClient = bannerContainerClient.GetBlobClient(bannerBlobName);
+         
 
-                // Upload the banner image
-                using (var stream = BannerImage.OpenReadStream())
-                {
-                    await bannerBlobClient.UploadAsync(stream, new BlobUploadOptions
-                    {
-                        HttpHeaders = new BlobHttpHeaders { ContentType = BannerImage.ContentType }
-                    });
-                }
-
-                bannerImageUrl = bannerBlobClient.Uri.ToString();
-            }
-
-            // Handle profile picture upload
-            if (ProfilePicture != null && ProfilePicture.Length > 0)
-            {
-                var profileContainerClient = _blobServiceClient.GetBlobContainerClient(_profilePictureContainerName);
-                string profileBlobName = $"{Guid.NewGuid()}_{Path.GetFileName(ProfilePicture.FileName)}";
-                var profileBlobClient = profileContainerClient.GetBlobClient(profileBlobName);
-
-                // Upload the profile picture
-                using (var stream = ProfilePicture.OpenReadStream())
-                {
-                    await profileBlobClient.UploadAsync(stream, new BlobUploadOptions
-                    {
-                        HttpHeaders = new BlobHttpHeaders { ContentType = ProfilePicture.ContentType }
-                    });
-                }
-
-                profilePictureUrl = profileBlobClient.Uri.ToString();
-            }
-
-            // Update channel data with new URLs (or keep existing URLs if no new file uploaded)
+          
             var updatedChannel = await _channelService.UpdateChannelDataAsync(
                 id,
                 bannerImageUrl ?? "",

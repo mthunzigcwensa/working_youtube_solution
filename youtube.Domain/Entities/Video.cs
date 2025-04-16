@@ -55,7 +55,7 @@ namespace youtube.Domain.Entities
             get
             {
                 if (AddByDate == null)
-                    return "Unknown time"; // Handle null cases for postedBy if applicable
+                    return "Unknown time";
 
                 var timeSpan = DateTime.UtcNow - AddByDate;
 

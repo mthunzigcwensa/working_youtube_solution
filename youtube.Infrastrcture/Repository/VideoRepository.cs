@@ -22,39 +22,37 @@ namespace youtube.Infrastrcture.Repository
         public async Task<IEnumerable<Video>> GetAllAsync()
         {
             return await _context.Videos
-         .Include(v => v.ChannelData) // Includes related ChannelData
+         .Include(v => v.ChannelData) 
          .ToListAsync();
         }
 
         public async Task<Video> GetByIdAsync(int id)
         {
-            // Define a new instance of the Video class to map the data
+            
             Video video = null;
 
-            // Use raw SQL to call the stored procedure and read the result
+            
             await using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "GetVideoById"; // Stored procedure name
+                command.CommandText = "GetVideoById";
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                // Add the parameter for the stored procedure
+               
                 var param = command.CreateParameter();
                 param.ParameterName = "@Id";
                 param.Value = id;
                 command.Parameters.Add(param);
 
-                // Open the connection if it's not already open
+               
                 if (command.Connection.State != System.Data.ConnectionState.Open)
                 {
                     await command.Connection.OpenAsync();
                 }
-
-                // Execute the command and read the results
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     if (await reader.ReadAsync())
                     {
-                        // Manually map the result to the Video class
+                        
                         video = new Video
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
@@ -131,22 +129,20 @@ namespace youtube.Infrastrcture.Repository
 
             await using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "GetVideosByUserId"; // Stored procedure name
+                command.CommandText = "GetVideosByUserId";
                 command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                // Add the parameter for the stored procedure
                 var param = command.CreateParameter();
                 param.ParameterName = "@UserId";
                 param.Value = userId;
                 command.Parameters.Add(param);
 
-                // Open the connection if it's not already open
+               
                 if (command.Connection.State != System.Data.ConnectionState.Open)
                 {
                     await command.Connection.OpenAsync();
                 }
 
-                // Execute the command and read the results
+                
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())
@@ -168,13 +164,13 @@ namespace youtube.Infrastrcture.Repository
                             AddByDate = reader.GetDateTime(reader.GetOrdinal("AddByDate"))
                         };
 
-                        // Map the related ChannelData if it exists
+                       
                         if (!reader.IsDBNull(reader.GetOrdinal("ChannelDataId")))
                         {
                             video.ChannelData = new ChannelData
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("ChannelDataId")),
-                                // Map other ChannelData properties here if needed
+                                
                             };
                         }
 

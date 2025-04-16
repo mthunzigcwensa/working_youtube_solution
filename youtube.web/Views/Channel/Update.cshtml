@@ -109,7 +109,7 @@
 
 <script src="~/js/tabs.js"></script>
 <script>
-    // Function to preview uploaded images
+   
     function previewImage(inputId, placeholderId) {
         const input = document.getElementById(inputId);
         const placeholder = document.getElementById(placeholderId);
@@ -127,24 +127,24 @@
         });
     }
 
-    // Initialize preview for banner and profile images
+    
     document.addEventListener('DOMContentLoaded', function () {
         previewImage('bannerImageInput', 'bannerImagePlaceholder');
         previewImage('profileImageInput', 'profileImagePlaceholder');
 
-        // Remove image functionality
+     
         document.querySelector('.remove-banner').addEventListener('click', function () {
             const placeholder = document.getElementById('bannerImagePlaceholder');
             const previewImg = placeholder.querySelector('img');
             previewImg.src = 'https://images.pexels.com/photos/1260727/pexels-photo-1260727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
-            document.getElementById('bannerImageInput').value = ''; // Clear the input
+            document.getElementById('bannerImageInput').value = ''; 
         });
 
         document.querySelector('.remove-profile').addEventListener('click', function () {
             const placeholder = document.getElementById('profileImagePlaceholder');
             const previewImg = placeholder.querySelector('img');
             previewImg.src = 'https://cdn-icons-png.flaticon.com/512/847/847969.png';
-            document.getElementById('profileImageInput').value = ''; // Clear the input
+            document.getElementById('profileImageInput').value = '';
         });
     });
 </script>

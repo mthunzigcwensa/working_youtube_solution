@@ -15,7 +15,7 @@ namespace youtube.web.Views.Shared.Components.Videos
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var videos = await _videoService.GetAllVideosAsync();
-            return View(videos); // This will render a view named 'Default.cshtml' in the ViewComponents folder
+            return View(videos); 
         }
     }
 

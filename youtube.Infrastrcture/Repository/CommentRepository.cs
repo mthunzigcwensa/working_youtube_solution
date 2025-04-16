@@ -41,22 +41,22 @@ namespace youtube.Infrastrcture.Repository
 
             await using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "GetVideoComments"; // Stored procedure name
+                command.CommandText = "GetVideoComments";
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                // Add the parameter for the stored procedure
+               
                 var param = command.CreateParameter();
                 param.ParameterName = "@VideoId";
                 param.Value = videoId;
                 command.Parameters.Add(param);
 
-                // Open the connection if it's not already open
+                
                 if (command.Connection.State != System.Data.ConnectionState.Open)
                 {
                     await command.Connection.OpenAsync();
                 }
 
-                // Execute the command and read the results
+                
                 using (var reader = await command.ExecuteReaderAsync())
                 {
                     while (await reader.ReadAsync())

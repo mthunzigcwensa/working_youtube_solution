@@ -7,7 +7,6 @@ using youtube.Application.Services.Interfaces;
 using youtube.Domain.Entities;
 using youtube.Infrastrcture.Data;
 using youtube.Infrastrcture.Repository;
-using youtube.web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(options =>
@@ -39,8 +38,7 @@ builder.Services.AddScoped<IChannelService, ChannelService>();
 builder.Services.AddScoped<IVideoService, VideoService>();
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
-
-builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.Configure<FormOptions>(options =>

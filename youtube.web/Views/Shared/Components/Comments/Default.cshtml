@@ -8,7 +8,7 @@
 
     <h3>@(Model?.Count() ?? 0) Comment(s)</h3>
 
-    <!-- Display each comment -->
+   
     @if (Model != null && Model.Any())
     {
         foreach (var comment in Model)
@@ -16,12 +16,12 @@
            
             <div class="comment">
                 <div class="comment-user-info">
-                    <!-- Avatar image -->
+                  
                 @if (userid == comment.UserId){
                     <a href="@Url.Action("index", "Channel", new { id = @comment.UserId  })">
                         <img src="@(!string.IsNullOrEmpty(@comment.ApplicationUser.ProfilePic) ? @comment.ApplicationUser.ProfilePic : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="User Avatar" class="comment-avatar">
                     </a>
-                    <!-- Comment details -->
+                    
                     <div class="comment-text">
                         <a href="@Url.Action("index", "Channel", new { id = @comment.UserId  })">
                             <p class="comment-user">
@@ -33,7 +33,7 @@
                         </a>
                         <p class="comment-content">@comment.userComment</p>
 
-                        <!-- Comment actions -->
+
                         <div class="comment-actions">
                             <button><i class="bi bi-hand-thumbs-up"></i> </button>
                             <button><i class="bi bi-hand-thumbs-down"></i></button>
@@ -45,7 +45,7 @@
                     <a href="@Url.Action("channelData", "Channel", new { id = @comment.UserId })">
                         <img src="@(!string.IsNullOrEmpty(@comment.ApplicationUser.ProfilePic) ? @comment.ApplicationUser.ProfilePic : "https://cdn-icons-png.flaticon.com/512/847/847969.png")" alt="User Avatar" class="comment-avatar">
                     </a>
-                    <!-- Comment details -->
+                   
                     <div class="comment-text">
                         <a href="@Url.Action("channelData", "Channel", new { id = @comment.ApplicationUser.Id })">
                             <p class="comment-user">
@@ -57,7 +57,7 @@
                         </a>
                         <p class="comment-content">@comment.userComment</p>
 
-                        <!-- Comment actions -->
+                       
                         <div class="comment-actions">
                             <button><i class="bi bi-hand-thumbs-up"></i> </button>
                             <button><i class="bi bi-hand-thumbs-down"></i></button>
