@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "youtube.Domain", "youtube.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "youtube.Infrastrcture", "youtube.Infrastrcture\youtube.Infrastrcture.csproj", "{4CA526BD-E0B4-4DCD-83EB-A3FF9B1CABB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "youtube.Tests", "youtube.Tests\youtube.Tests.csproj", "{6F2CE2A7-F449-4C5E-86E8-CEA36B0C1549}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4CA526BD-E0B4-4DCD-83EB-A3FF9B1CABB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CA526BD-E0B4-4DCD-83EB-A3FF9B1CABB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CA526BD-E0B4-4DCD-83EB-A3FF9B1CABB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F2CE2A7-F449-4C5E-86E8-CEA36B0C1549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F2CE2A7-F449-4C5E-86E8-CEA36B0C1549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F2CE2A7-F449-4C5E-86E8-CEA36B0C1549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F2CE2A7-F449-4C5E-86E8-CEA36B0C1549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
